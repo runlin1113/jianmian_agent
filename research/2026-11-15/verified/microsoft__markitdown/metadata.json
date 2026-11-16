@@ -1,0 +1,18 @@
+{
+  "repo": "microsoft/markitdown",
+  "retrieved_at": "2026-11-15T09:29:36.305317+00:00",
+  "files": {
+    "README.md": {
+      "sha256": "7d27ea30126c35a18fb7392454a30da72f62def2cc0cd222926e6207ac82a9d8",
+      "url": "https://raw.githubusercontent.com/microsoft/markitdown/ed178952a6672abdfd35b5f9e76a80b6cefc086e/README.md"
+    },
+    "LICENSE": {
+      "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+      "url": "https://raw.githubusercontent.com/microsoft/markitdown/ed178952a6672abdfd35b5f9e76a80b6cefc086e/LICENSE"
+    }
+  },
+  "errors": [
+    "repository page: The read operation timed out"
+  ],
+  "ref": "ed178952a6672abdfd35b5f9e76a80b6cefc086e"
+}

@@ -1,0 +1,671 @@
+# -*- coding: utf-8 -*-
+"""生成《简面智能体项目策划书》"""
+import os
+from docx import Document
+from docx.shared import Pt, Cm, RGBColor
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING, WD_BREAK
+from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.enum.section import WD_SECTION
+from docx.oxml.ns import qn
+from docx.oxml import OxmlElement
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+IMG = os.path.join(HERE, "img")
+OUT = os.path.join(os.path.dirname(HERE), "简面智能体项目策划书.docx")
+
+SONG, HEI, EN = "宋体", "黑体", "Times New Roman"
+INK = RGBColor(0x00, 0x00, 0x00)
+GREY = RGBColor(0x59, 0x59, 0x59)
+
+
+# ---------------- 基础工具 ----------------
+def style_run(run, cn=SONG, en=EN, size=12, bold=False, color=INK):
+    run.font.name = en
+    run.font.size = Pt(size)
+    run.font.bold = bold
+    run.font.color.rgb = color
+    rPr = run._element.get_or_add_rPr()
+    rFonts = rPr.find(qn("w:rFonts"))
+    if rFonts is None:
+        rFonts = OxmlElement("w:rFonts")
+        rPr.append(rFonts)
+    for k in ("w:ascii", "w:hAnsi", "w:eastAsia", "w:cs"):
+        rFonts.set(qn(k), en if k != "w:eastAsia" else cn)
+
+
+def set_indent_chars(p, chars=2):
+    pPr = p._p.get_or_add_pPr()
+    ind = pPr.find(qn("w:ind"))
+    if ind is None:
+        ind = OxmlElement("w:ind")
+        pPr.append(ind)
+    ind.set(qn("w:firstLine"), str(int(chars * 240)))
+    ind.set(qn("w:firstLineChars"), str(int(chars * 100)))
+
+
+def body(doc, text, indent=True, size=12, space_before=0, space_after=0, align=WD_ALIGN_PARAGRAPH.JUSTIFY):
+    p = doc.add_paragraph()
+    p.alignment = align
+    pf = p.paragraph_format
+    pf.line_spacing = 1.5
+    pf.space_before = Pt(space_before)
+    pf.space_after = Pt(space_after)
+    if indent:
+        set_indent_chars(p, 2)
+    r = p.add_run(text)
+    style_run(r, SONG, EN, size)
+    return p
+
+
+def h1(doc, text):
+    p = doc.add_paragraph(style="Heading 1")
+    pf = p.paragraph_format
+    pf.space_before = Pt(18)
+    pf.space_after = Pt(10)
+    pf.line_spacing = 1.3
+    pf.keep_with_next = True
+    r = p.add_run(text)
+    style_run(r, HEI, EN, 16, bold=True)
+    return p
+
+
+def h2(doc, text):
+    p = doc.add_paragraph(style="Heading 2")
+    pf = p.paragraph_format
+    pf.space_before = Pt(11)
+    pf.space_after = Pt(5)
+    pf.line_spacing = 1.35
+    pf.keep_with_next = True
+    r = p.add_run(text)
+    style_run(r, HEI, EN, 13.5, bold=True)
+    return p
+
+
+def h3(doc, text):
+    p = doc.add_paragraph(style="Heading 3")
+    pf = p.paragraph_format
+    pf.space_before = Pt(8)
+    pf.space_after = Pt(3)
+    pf.line_spacing = 1.4
+    pf.keep_with_next = True
+    r = p.add_run(text)
+    style_run(r, HEI, EN, 12, bold=True)
+    return p
+
+
+def caption(doc, text, above=True):
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    pf = p.paragraph_format
+    pf.space_before = Pt(9 if above else 4)
+    pf.space_after = Pt(4 if above else 9)
+    pf.line_spacing = 1.0
+    pf.keep_with_next = above
+    r = p.add_run(text)
+    style_run(r, HEI if above else SONG, EN, 10.5 if above else 9, bold=above,
+              color=INK if above else GREY)
+    return p
+
+
+def _border(el_parent, tag, val="single", sz=8, color="000000"):
+    el = OxmlElement(f"w:{tag}")
+    el.set(qn("w:val"), val)
+    el.set(qn("w:sz"), str(sz))
+    el.set(qn("w:space"), "0")
+    el.set(qn("w:color"), color)
+    el_parent.append(el)
+
+
+def add_table(doc, cap, headers, rows, widths):
+    caption(doc, cap, above=True)
+    t = doc.add_table(rows=1, cols=len(headers))
+    t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    t.autofit = False
+    tblPr = t._tbl.tblPr
+
+    # 三线表
+    borders = OxmlElement("w:tblBorders")
+    _border(borders, "top", sz=12)
+    _border(borders, "bottom", sz=12)
+    for edge in ("left", "right", "insideH", "insideV"):
+        _border(borders, edge, val="none", sz=0)
+    tblPr.append(borders)
+
+    # 单元格边距
+    mar = OxmlElement("w:tblCellMar")
+    for side, v in (("top", 30), ("bottom", 30), ("left", 80), ("right", 80)):
+        el = OxmlElement(f"w:{side}")
+        el.set(qn("w:w"), str(v))
+        el.set(qn("w:type"), "dxa")
+        mar.append(el)
+    tblPr.append(mar)
+
+    hdr = t.rows[0]
+    hdr.cells[0].paragraphs[0].paragraph_format.keep_with_next = True
+    for i, h in enumerate(headers):
+        cell = hdr.cells[i]
+        cell.width = Cm(widths[i])
+        p = cell.paragraphs[0]
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.line_spacing = 1.0
+        p.paragraph_format.space_before = Pt(2)
+        p.paragraph_format.space_after = Pt(2)
+        r = p.add_run(h)
+        style_run(r, HEI, EN, 10.5, bold=True)
+        # 表头下横线
+        tcPr = cell._tc.get_or_add_tcPr()
+        tcB = OxmlElement("w:tcBorders")
+        _border(tcB, "bottom", sz=8)
+        tcPr.append(tcB)
+        # 禁止跨行
+        trPr = hdr._tr.get_or_add_trPr()
+        if trPr.find(qn("w:cantSplit")) is None:
+            trPr.append(OxmlElement("w:cantSplit"))
+
+    for row in rows:
+        cells = t.add_row().cells
+        t.rows[-1]._tr.get_or_add_trPr().append(OxmlElement("w:cantSplit"))
+        for i, val in enumerate(row):
+            cells[i].width = Cm(widths[i])
+            p = cells[i].paragraphs[0]
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT if i > 0 or len(str(val)) > 8 else WD_ALIGN_PARAGRAPH.CENTER
+            p.paragraph_format.line_spacing = 1.15
+            p.paragraph_format.space_before = Pt(2)
+            p.paragraph_format.space_after = Pt(2)
+            r = p.add_run(str(val))
+            style_run(r, SONG, EN, 10.5)
+
+    # 表格整体不加缩进
+    return t
+
+
+def add_figure(doc, path, cap, width_cm=14.4):
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.space_before = Pt(8)
+    p.paragraph_format.space_after = Pt(2)
+    p.paragraph_format.keep_with_next = True
+    p.add_run().add_picture(path, width=Cm(width_cm))
+    caption(doc, cap, above=False)
+
+
+def field(paragraph, instr, placeholder=""):
+    r1 = paragraph.add_run()
+    fc = OxmlElement("w:fldChar")
+    fc.set(qn("w:fldCharType"), "begin")
+    r1._r.append(fc)
+
+    r2 = paragraph.add_run()
+    it = OxmlElement("w:instrText")
+    it.set(qn("xml:space"), "preserve")
+    it.text = instr
+    r2._r.append(it)
+
+    r3 = paragraph.add_run()
+    fc2 = OxmlElement("w:fldChar")
+    fc2.set(qn("w:fldCharType"), "separate")
+    r3._r.append(fc2)
+
+    r4 = paragraph.add_run(placeholder)
+
+    r5 = paragraph.add_run()
+    fc3 = OxmlElement("w:fldChar")
+    fc3.set(qn("w:fldCharType"), "end")
+    r5._r.append(fc3)
+    return [r1, r2, r3, r4, r5]
+
+
+# ---------------- 文档骨架 ----------------
+doc = Document()
+
+# 页面设置：A4，上下 2.54，左右 3.17
+sec = doc.sections[0]
+sec.page_width = Cm(21.0)
+sec.page_height = Cm(29.7)
+sec.top_margin = Cm(2.54)
+sec.bottom_margin = Cm(2.54)
+sec.left_margin = Cm(3.17)
+sec.right_margin = Cm(3.17)
+sec.header_distance = Cm(1.5)
+sec.footer_distance = Cm(1.5)
+
+normal = doc.styles["Normal"]
+normal.font.name = EN
+normal.font.size = Pt(12)
+normal._element.rPr.rFonts.set(qn("w:eastAsia"), SONG)
+
+# 让 Word / WPS 打开时更新目录域
+settings = doc.settings.element
+uf = OxmlElement("w:updateFields")
+uf.set(qn("w:val"), "true")
+settings.append(uf)
+
+# ---------------- 封面 ----------------
+for _ in range(3):
+    doc.add_paragraph()
+
+p = doc.add_paragraph()
+p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+p.paragraph_format.space_after = Pt(4)
+r = p.add_run("简　面")
+style_run(r, HEI, EN, 40, bold=True)
+
+p = doc.add_paragraph()
+p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+p.paragraph_format.space_after = Pt(30)
+r = p.add_run("Jianmian Studio")
+style_run(r, EN, EN, 14, color=GREY)
+
+p = doc.add_paragraph()
+p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+p.paragraph_format.space_after = Pt(6)
+r = p.add_run("项 目 策 划 书")
+style_run(r, HEI, EN, 22, bold=True)
+
+p = doc.add_paragraph()
+p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+p.paragraph_format.space_after = Pt(60)
+r = p.add_run("基于大模型的模块化简历撰写与面试辅助系统")
+style_run(r, SONG, EN, 12.5, color=GREY)
+
+info = [
+    ("项目名称", "简面智能体（Jianmian Studio）"),
+    ("项目类型", "课程设计 · 个人独立开发"),
+    ("项目负责人", "凌润林"),
+    ("专业方向", "人工智能"),
+    ("文档版本", "V1.0"),
+    ("完成时间", "2026 年 11 月"),
+]
+t = doc.add_table(rows=0, cols=2)
+t.alignment = WD_TABLE_ALIGNMENT.CENTER
+t.autofit = False
+for k, v in info:
+    cells = t.add_row().cells
+    cells[0].width = Cm(3.6)
+    cells[1].width = Cm(8.4)
+    p0 = cells[0].paragraphs[0]
+    p0.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    p0.paragraph_format.space_before = Pt(3)
+    p0.paragraph_format.space_after = Pt(3)
+    style_run(p0.add_run(k + "："), SONG, EN, 11, color=GREY)
+    p1 = cells[1].paragraphs[0]
+    p1.paragraph_format.space_before = Pt(3)
+    p1.paragraph_format.space_after = Pt(3)
+    style_run(p1.add_run(v), SONG, EN, 11)
+
+doc.add_page_break()
+
+# ---------------- 目录 ----------------
+p = doc.add_paragraph()
+p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+p.paragraph_format.space_after = Pt(16)
+r = p.add_run("目　　录")
+style_run(r, HEI, EN, 18, bold=True)
+
+tp = doc.add_paragraph()
+tp.paragraph_format.line_spacing = 1.5
+rs = field(tp, ' TOC \\o "1-2" \\h \\z \\u ', "打开文档后按 F9 更新目录")
+for r in rs:
+    style_run(r, SONG, EN, 11)
+
+doc.add_page_break()
+
+# ---------------- 页眉页脚 ----------------
+sec.different_first_page_header_footer = True
+hp = sec.header.paragraphs[0]
+hp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+style_run(hp.add_run("简面 Jianmian Studio　项目策划书"), SONG, EN, 9, color=GREY)
+pBdr = OxmlElement("w:pBdr")
+_border(pBdr, "bottom", sz=4, color="BFBFBF")
+hp._p.get_or_add_pPr().append(pBdr)
+
+fp = sec.footer.paragraphs[0]
+fp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+for r in field(fp, " PAGE ", "1"):
+    style_run(r, SONG, EN, 9, color=GREY)
+
+# ================= 第一章 =================
+h1(doc, "第一章　项目概述")
+
+h2(doc, "1.1　项目名称与释义")
+body(doc, "本项目中文名“简面”，英文名 Jianmian Studio，取自“简历”与“面试”两个词。名字背后是一个判断：一份简历的全部价值，是换来一次面试；而面试里被追问的内容，又几乎全部来自简历上写过的东西。把写作和面试放在同一个产品里，用户才有机会发现自己写下的哪一句经不起追问。")
+body(doc, "项目前身为“简面简历编辑平台”，由本人独立开发并已部署上线，具备模块化编辑、AI 润色、A4 预览与 PDF 导出四项能力。本次升级在该平台基础上接入智能体，文档中统一称“简面智能体”。")
+
+h2(doc, "1.2　项目定位")
+body(doc, "简面是一套面向高校学生与初入职场者的简历撰写与面试准备工具。用户不必从空白文档起草，只需按模块填入自己的经历，由模型针对目标岗位改写，最终输出一份控制在一页 A4 内的文档；定稿之后，系统依据简历内容生成模拟面试题，把“写”和“面”接成一条线。")
+body(doc, "产品形态上刻意避开“一次生成一份完整简历交给用户”的做法。简历里的事实只有用户自己知道，模型能做的是组织与表达，不是无中生有。因此所有 AI 输出都落回可编辑的模块字段，用户随时能看、能改、能退回上一版。")
+
+h2(doc, "1.3　项目背景")
+body(doc, "校招的初筛环节以简历为唯一材料。一个岗位收到的简历常在数百份以上，招聘方停留在单份简历上的时间以秒计算，能否在几秒内看到与岗位匹配的信息，直接决定是否进入下一轮。")
+body(doc, "高校课程体系里没有简历写作的训练。学生第一次写简历，多半参照学长学姐的模板或网上的范文。模板解决的是版式问题，解决不了内容判断：哪段经历该留、哪个数字该写、面向这个岗位应该突出什么。结果是大量简历长得一样，也都停在“参与”“负责”“协助”这类没有信息量的动词上。")
+body(doc, "大模型让段落写作的门槛降了下来，但通用对话框与简历之间还隔着一层工程问题：输出要结构化，页数要压到一页，姓名与时间这类事实不能被改写，结果要能直接排成 A4 版式。这些问题不属于模型能力，属于软件设计，恰好是可以由本项目解决的。")
+body(doc, "再看现有产品。在线简历站的排版已经做得很成熟，但把“针对岗位改写”和“面试准备”放在付费墙之后，源码不开放，数据存在云端。对价格敏感、又在意个人信息的学生群体，门槛偏高。")
+
+h2(doc, "1.4　建设目标")
+body(doc, "（1）完成一套零部署成本的简历工具。单个 HTML 文件双击即可使用，导出的 PDF 符合 A4 规范，分页处不出现半页空白。")
+body(doc, "（2）把简历从“表单”变成“可对话的对象”。用户用自然语言描述需求，系统返回可编辑的结果，而不是一段需要用户自己搬运的文本。")
+body(doc, "（3）建立岗位知识与个人记忆两条数据线。前者让改写有依据，后者让多次迭代之间不丢失上下文。")
+body(doc, "（4）沉淀一套可复用的智能体工程做法。工具协议、结构化输出校验、事实字段保护、成本控制，这四点在本项目中都已遇到具体问题，并有对应解法。")
+
+# ================= 第二章 =================
+h1(doc, "第二章　市场与需求分析")
+
+h2(doc, "2.1　市场机会")
+body(doc, "每年高校毕业生规模在千万级，加上实习生与社招新人，简历工具的潜在用户量并不小。但这类工具的使用是低频、强需求的：一个人一年可能只用两三次，可每次都在时间压力下完成。低频意味着用户不愿意为它付费订阅，强需求意味着他们愿意花时间找一个顺手的工具。这决定了产品的合理形态是免费、轻量、打开即用，而不是订阅制的重型 SaaS。")
+body(doc, "另一个变化来自模型侧。两年前做同类功能需要自己训练模型或调用昂贵的接口，现在按 token 计费的成本已经降到可以免费提供体验额度的水平。这给个人开发者留出了空间：一个人可以在业余时间做出可用的产品，成本由体验额度控制。")
+
+h2(doc, "2.2　目标用户")
+body(doc, "按使用动机把用户分成三类，见下表。三类人缺的东西不一样，产品对他们的默认路径也应该不一样。")
+add_table(doc, "表 1　目标用户画像",
+          ["类型", "典型场景", "主要困难", "期待"],
+          [["在校生（主力）", "大二至研三，第一次投实习或校招", "经历零散、不会提炼、不了解岗位要求", "有人带着写，改完能直接用"],
+           ["职场新人", "工作一到三年，换方向或跳槽", "素材多但不会取舍，简历写到两三页", "压缩、重组，突出与新岗位的相关性"],
+           ["临时用户", "帮同学看简历，短期集中投递", "时间紧，只想要一份能交的稿子", "导入旧简历，快速改"]],
+          [2.9, 4.3, 4.4, 3.0])
+
+body(doc, "两类主要用户的差别在于“有没有素材”。在校生缺内容，需要引导和挖掘；职场新人缺组织方式，需要压缩和对齐。产品对前者侧重提问与补全，对后者侧重重排与取舍。")
+
+h2(doc, "2.3　用户痛点")
+body(doc, "痛点是按用户动手写简历的顺序依次出现的，大致分四层。")
+h3(doc, "（一）结构层：不知道简历由哪些部分构成")
+body(doc, "不清楚一份简历应该包含哪些部分，各部分的顺序和篇幅怎么分配。这一层最容易解决，给一套模块清单就够了。")
+h3(doc, "（二）转化层：不会把做过的事写成结果")
+body(doc, "这是最普遍、也最难的一层。学生写“参与了 XX 课程设计，使用 Python 完成数据分析”，招聘方想读的是“清洗了多少条数据、用了什么方法、把什么指标从多少降到多少”。缺的不是经历，是把经历翻译成岗位语言的能力。这一层需要模型介入，也需要用户补出原始细节。")
+h3(doc, "（三）对齐层：同一段经历投不同岗位，重点完全不同")
+body(doc, "投算法岗要突出模型选择与指标，投产品岗要突出需求判断与协作过程。多数学生只有一版简历，投所有岗位，于是每个岗位看到的都是“差不多但不是最合适”的那一版。")
+h3(doc, "（四）市场层：不了解目标岗位的真实要求")
+body(doc, "包括关键词、能力模型与筛选标准。不清楚这些，就容易把时间花在次要的地方，比如反复调整字体，却不补一条量化结果。")
+
+h2(doc, "2.4　同类工具分析")
+body(doc, "把市面上的常见做法归为四类，与本项目逐项对比。")
+add_table(doc, "表 2　同类工具能力对比",
+          ["维度", "办公软件模板", "在线简历站", "通用大模型对话", "本项目"],
+          [["排版与导出", "版式齐全，需自己排版", "规范，导出多需付费", "无排版能力", "A4 分页，浏览器直出 PDF"],
+           ["内容改写", "无", "弱，以模板套用为主", "强，但输出为纯文本", "强，按模块定向改写"],
+           ["岗位定向", "无", "部分功能收费", "依赖用户自己描述", "目标岗位注入每次提示词"],
+           ["旧简历导入", "无", "支持上传", "需手工粘贴", "规划中"],
+           ["面试准备", "无", "少数产品附带", "有，但泛化", "已具备基础版"],
+           ["使用成本", "会员制", "订阅制", "按量或订阅", "开源免费"],
+           ["数据归属", "本地", "云端", "云端", "简历正文仅存本地"]],
+          [2.5, 3.3, 3.1, 3.2, 3.5])
+body(doc, "表格里能看出一个空档：排版做得好的地方不擅长写内容，会写内容的地方不管排版和页数。市场不缺模板，也不缺会写字的模型，缺的是把用户素材和目标岗位接起来、并且结果能直接用的那一步。这就是本项目的切入点。")
+
+h2(doc, "2.5　需求优先级")
+body(doc, "按用户价值与实现成本排序，确定各功能的开发次序。表中“状态”区分已上线与规划中，避免把计划当作已完成。")
+add_table(doc, "表 3　需求优先级",
+          ["需求", "用户价值", "实现成本", "优先级", "状态"],
+          [["模块化编辑", "高", "低", "P0", "已上线"],
+           ["单模块岗位定向润色", "高", "中", "P0", "已上线"],
+           ["整体压缩至一页", "高", "中", "P0", "已上线"],
+           ["A4 预览与 PDF 导出", "高", "中", "P0", "已上线"],
+           ["旧简历解析导入", "高", "高", "P1", "规划中"],
+           ["对话式构建简历", "高", "高", "P1", "开发中"],
+           ["记忆模块", "中高", "中", "P1", "开发中"],
+           ["面试官", "中", "中", "P2", "基础版已上线"],
+           ["岗位知识库与联网", "中", "高", "P2", "规划中"]],
+          [5.0, 2.2, 2.2, 2.0, 3.2])
+
+# ================= 第三章 =================
+h1(doc, "第三章　产品设计")
+
+h2(doc, "3.1　产品形态")
+body(doc, "产品是单页 Web 应用。界面分三栏：左栏是模块清单，可增删与排序；中栏是 A4 纸张的实时预览；右栏是当前模块的字段表单。顶部固定目标岗位输入与主要操作入口。")
+body(doc, "三栏结构不是随意定的。简历是所见即所得的文档，任何改动都应当在纸面上立刻看到结果，否则用户无法判断改得对不对；模块清单让用户始终知道这份简历还缺哪几块，避免写到一半忘记教育背景；右栏只放当前模块，把注意力收在一处，减少在长表单里迷路。")
+
+h2(doc, "3.2　核心使用流程")
+body(doc, "整个流程六步走完，每一步都有明确产出。")
+body(doc, "（1）设定目标岗位。这个输入会进入后续每一次改写的提示词，是“岗位定向”的源头。")
+body(doc, "（2）添加模块并填写。八类模块可选，顺序可自定义。")
+body(doc, "（3）单模块润色。只重写当前模块的描述性字段，其余字段不动。")
+body(doc, "（4）整体压缩。把全部模块的文本一次性交给模型，压到一页 A4 以内。")
+body(doc, "（5）预览校对。在纸面上检查分页、留白与用词。")
+body(doc, "（6）导出 PDF。走浏览器打印，使用专用样式表。")
+body(doc, "升级为智能体后，第（2）步可以由对话代替：用户描述自己的经历，系统拆成模块并填好，用户再逐块确认。")
+
+h2(doc, "3.3　现有平台功能")
+body(doc, "现有平台已经上线，功能与实现方式如下表。这一部分是智能体的底座，其稳定性直接决定上层体验。")
+add_table(doc, "表 4　现有平台功能清单",
+          ["功能", "实现方式", "状态"],
+          [["模块化编辑", "八类模块，字段由模块定义驱动，可增删排序", "已上线"],
+           ["单模块 AI 润色", "通用规则 + 模块规则 + 目标岗位上下文组装提示词", "已上线"],
+           ["整体压缩至一页", "结构化收集字段，要求模型返回 JSON，逐字段回填", "已上线"],
+           ["A4 分页", "按 297mm 页高计算内容高度，超出自动新建页面", "已上线"],
+           ["PDF 导出", "专用打印样式表，屏幕阴影与缩放全部展平", "已上线"],
+           ["主题配色", "六套配色，同步作用到界面与简历纸张", "已上线"],
+           ["历史快照", "命名保存当前简历，含模块、岗位、模板与主题", "已上线"],
+           ["肖像处理", "上传后画布裁切压缩，以 Base64 存入本地", "已上线"],
+           ["模拟面试题", "基于简历生成六至八道题，附追问方向与准备建议", "基础版已上线"],
+           ["旧简历导入", "将 PDF 与 Word 解析为模块结构", "规划中"]],
+          [3.0, 8.2, 3.2])
+
+h2(doc, "3.4　从工具到智能体的五项能力升级")
+h3(doc, "（一）对话式构建")
+body(doc, "现状是用户自己一块一块填。升级后，用户用一段话说明身份、目标岗位和主要经历，系统据此填出初稿，缺什么再反问。关键约束是初稿必须落回模块字段，而不是给一份文本让用户自行复制。")
+h3(doc, "（二）记忆")
+body(doc, "记录目标岗位、项目库、技能、个人特征与表达偏好。记忆的作用不只是“记得住”，更在于减少重复输入：同一批项目在投第二个岗位时不必重填，系统知道用户习惯用分点还是段落。")
+h3(doc, "（三）知识库与联网")
+body(doc, "岗位要求不能靠模型猜。知识库存放常见岗位的能力模型与关键词；联网用于获取最新的招聘要求与公司信息。两者的输出都只作为改写依据，不直接写进简历。")
+h3(doc, "（四）简历解析")
+body(doc, "用户手上多半已有一份旧简历，格式是 PDF 或 Word。解析的作用是把它拆成八类模块，之后所有编辑能力都能作用在这份旧稿上。这是转化率最高的一项功能，也是技术上最容易低估的一项。")
+h3(doc, "（五）面试官")
+body(doc, "依据定稿简历生成面试题，覆盖项目细节、技术选择、结果归因与岗位匹配。与通用题库的区别在于，题目必须挂在简历里写过的内容上，追问也沿着同一处往下挖。")
+
+h2(doc, "3.5　设计原则")
+body(doc, "三条原则贯穿整个实现，每一条都对应一次具体的失败。")
+body(doc, "原则一，中间产物必须可编辑。早期考虑过让模型直接输出排版好的文本或 HTML，实现起来简单。但用户改一个字就要重新生成整段，几轮之后无法确认哪一版是自己要的。改为结构化字段后，模型的输出是一组键值对，用户在哪一项上不满意就只改那一项。")
+body(doc, "原则二，事实不交给模型。压缩功能上线初期出现过模型顺手改掉入职时间、把公司名写短的情况。此后在提示词里显式列出不可改动的字段，包括姓名、电话、邮箱、学校、公司、职位、起止时间、学历与专业，并要求只压缩描述性文字；回填时再做一次字段级比对。")
+body(doc, "原则三，先预览，后应用。任何改写结果都先在侧栏展示，用户确认后才写入简历，写入后仍可从历史快照退回。简历本身不是高压力文档，但错误的改动会直接影响投递，撤销成本必须足够低。")
+
+# ================= 第四章 =================
+h1(doc, "第四章　技术方案")
+
+h2(doc, "4.1　总体架构")
+body(doc, "系统分三层，层与层之间只通过一组固定接口通信。")
+add_figure(doc, os.path.join(IMG, "arch.png"), "图 1　简面系统总体架构")
+add_table(doc, "表 5　分层职责与技术选型",
+          ["层级", "组成", "职责", "选型理由"],
+          [["前端", "单文件 index.html，原生 JavaScript", "模块编辑、A4 渲染、本地存储、调用代理", "零依赖零构建，双击可离线使用"],
+           ["服务", "Cloudflare Pages 静态托管与 Pages Function", "隐藏密钥、消除跨域、按客户端限流", "免服务器运维，免费额度满足当前规模"],
+           ["模型", "DeepSeek chat/completions 接口", "润色、压缩、面试题生成", "中文表达稳定，按 token 计费"],
+           ["数据", "浏览器 localStorage 与 Cloudflare KV", "简历正文本地保存，额度计数跨请求共享", "简历不出本机，计数需集中"]],
+          [1.8, 4.6, 4.4, 4.2])
+body(doc, "前端只负责呈现和编辑，服务层只负责鉴权与限流，模型只负责生成，三者互不越权。这样分层的好处是替换成本低：换模型只改服务层一个常量和一套提示词，换托管平台不影响前端。")
+
+h2(doc, "4.2　前端实现")
+body(doc, "前端是一个约 2700 行、11 万字符的单文件 HTML，没有框架、没有 CDN、没有构建步骤。这个选择有代价，状态管理和组件复用都要手写；收益是部署成本为零，用户把文件拖进浏览器就能用基础功能，也方便把整个应用作为一份文件分发和存档。")
+body(doc, "状态由一个对象承载：目标岗位、模板、主题与模块数组，序列化后写入 localStorage；历史快照单独存放，支持命名与恢复。渲染分两块，界面走常规 DOM，简历纸张按 A4 的物理尺寸 210×297mm 布局，单位统一用毫米，保证屏幕显示与打印输出一致。")
+body(doc, "主题通过 CSS 变量实现。六套配色只改一组变量，同时作用到界面与纸张，避免出现界面是这套色、导出却是另一套色的错位。")
+
+h2(doc, "4.3　服务层与额度控制")
+body(doc, "服务层是一个一百余行的 Cloudflare Pages Function，解决三个具体问题。")
+body(doc, "一是密钥。站长的 API Key 只存在于服务端环境变量中，浏览器拿不到。二是跨域。前端请求同源的 /api/chat，由服务端转发到模型接口，浏览器不再直连模型域名，跨域问题从根上消失。")
+body(doc, "三是额度。限流键优先取 cf-connecting-ip，这个请求头由 Cloudflare 注入，客户端无法伪造；取不到时退化为前端生成的匿名标识。KV 中按客户端记录已用 token 与重置时间，采用 24 小时滚动窗口，默认每个客户端每日 60000 token。额度耗尽返回 402 与额度用完的错误码，前端据此引导用户填写自有 Key。")
+body(doc, "用户自备 Key 时，请求头携带 Authorization，服务层直接转发，不计额度也不写入 KV。这条分支既是成本控制手段，也是产品的一种表态：站长提供的是体验额度，长期使用应该用自己的账号。")
+body(doc, "这套设计有明确的取舍。以 IP 为粒度，同一局域网内的多个人会共享一份额度；但它的实现成本接近于零，且比本地存储里的标识更难伪造，对课程项目而言是合适的平衡。")
+
+h2(doc, "4.4　提示词工程")
+body(doc, "每次调用由三段拼成：通用规则、模块专用规则与岗位上下文。")
+body(doc, "通用规则固定语气与长度，禁用空泛的行业套话，要求直接给结果、不带解释。模块规则按模块性质分别写：项目经历要求每句以强动词开头、提取可量化结果、分点呈现；自我评价要求删掉套话、提炼三个卖点；个人技能要求按技术类别合并同类项。岗位上下文注入用户填写的目标岗位与岗位需求描述，这是“定向”二字的全部来源。")
+body(doc, "输出密度分两档。精炼档要求每个字段一到两句、不超过 60 字；适中档两到三句。用户可切换，因为投递不同公司时对篇幅的容忍度不同。")
+body(doc, "整体压缩的提示词另有一段结构化要求：返回模块与字段的嵌套 JSON，明确列出不可改动的事实字段，同时限定总字数约 850 字、项目与实习每段保留两到三条要点。返回后按模块标识与字段名回填，解析失败则提示重试而不写入，避免把半截 JSON 写进简历。")
+
+h2(doc, "4.5　分页与导出")
+body(doc, "A4 在 96dpi 下高约 1122.5 像素，渲染时逐块累加内容高度，超出即新建一张页面，最后按张数显示页数徽标。用户因此能实时看到“已经写到第二页”，而不是导出后才发现。")
+body(doc, "导出走浏览器打印，配一份专用样式表：页面设为 A4、边距归零，打印时把屏幕上的圆角、阴影与缩放全部展平，让多张页面自然分页。没有引入第三方 PDF 库，一是减少体积，二是避免中文字体嵌入带来的排版偏差。")
+
+h2(doc, "4.6　数据存储与隐私")
+body(doc, "简历正文只存在浏览器本地，不上传服务器；经代理调用时，请求体在内存中转发给模型，不落盘、不写日志；站长密钥不下发到前端。")
+body(doc, "“数据不出本机”是这个产品相对在线简历站的明确取舍。代价是换设备后无法同步。后续如果做账号体系，会采用可选的端到端加密存储，而不是默认上传。")
+
+# ================= 第五章 =================
+h1(doc, "第五章　智能体方案设计")
+
+h2(doc, "5.1　智能体结构")
+body(doc, "智能体分四层，层间单向依赖：上层调用下层，下层不感知上层。")
+add_figure(doc, os.path.join(IMG, "agent.png"), "图 2　智能体四层结构")
+body(doc, "这里需要说明为什么保留表单。简历是强结构数据，纯对话编辑在多轮之后容易失控：用户说“再简洁一点”，模型可能同时删掉了一条关键结果。表单是确定性的，对话负责补全与改写，表单负责承载与校正，两者分工而不是互相替代。")
+
+h2(doc, "5.2　编排层与工具协议")
+body(doc, "编排层不做固定工作流，按用户意图动态选择工具序列。这一点与常见的工作流编排不同：用户可能说“帮我把项目经历改得像后端”，也可能说“我投这个岗位还缺什么”。前者是一次改写，后者要先取岗位要求再比对，工具序列完全不同。")
+add_table(doc, "表 6　工具集设计",
+          ["工具", "输入", "输出", "用途"],
+          [["fill_module", "模块类型、自然语言描述", "字段键值对", "对话生成初稿"],
+           ["rewrite_field", "模块标识、字段名、改写要求", "新文本", "单点修改"],
+           ["compress_all", "全部模块文本、字数上限", "各字段压缩结果", "一页化处理"],
+           ["parse_resume", "PDF 或 Word 文件", "模块数组与置信度", "旧简历导入"],
+           ["search_jd", "岗位名、城市", "岗位要求条目", "岗位知识检索"],
+           ["ask_user", "待确认的问题", "用户回答", "信息补全"],
+           ["render_preview", "模块数组", "页面高度与分页结果", "预览与页数校验"],
+           ["generate_interview", "定稿简历", "题目与追问方向", "面试准备"]],
+          [3.6, 4.6, 3.4, 3.2])
+body(doc, "工具调用采用函数调用而非提示词约定，原因是参数需要校验：模块标识必须存在，字段名必须在模块定义之内，写错就拒绝执行，而不是让模型自由发挥。")
+
+h2(doc, "5.3　记忆模块")
+body(doc, "记忆分两层。短期是当前会话的对话与简历状态；长期是结构化用户档案，包含目标岗位、项目库、技能清单、个人特征与表达偏好，另有历史版本用于回溯。")
+body(doc, "写入策略上有一个刻意的限制：只在用户确认后写入。模型在对话里会推断出一些信息，比如“这位用户偏向分点表达”，如果直接落库，几轮之后档案里就混进了猜测。读取时按相关性注入，不把整份档案塞进上下文，既省 token，也避免无关信息干扰当前任务。")
+
+h2(doc, "5.4　知识库与联网检索")
+body(doc, "知识库存三类内容：常见岗位的招聘要求模板、岗位能力模型与关键词、简历写作的常见问题。检索按岗位名与技能标签做混合检索，关键词匹配保证召回，向量检索补充语义相近的表述，取前若干条注入提示词。")
+body(doc, "联网只用于获取实时信息，例如某公司当年的招聘页面。结果必须标注来源与获取时间，并且不直接写成简历内容，只作为改写依据。原因很直接：招聘信息会变，模型也没有能力判断网页内容是否过期。")
+
+h2(doc, "5.5　简历解析")
+body(doc, "这是整个方案里最容易被低估的一环。流程分五步：文本抽取、版面分块、字段映射、置信度打分、低置信度字段交用户确认。")
+body(doc, "难点集中在版式。双栏排版的阅读顺序、表格里的时间与公司、图片化的文字，都会让“按行读”的朴素做法失效。对策是分档支持：Word 与可复制文本的 PDF 走完整解析；扫描件先做文字识别，并在结果上标注“需人工核对”，不假装解析成功。宁可让用户改两处，也不要给出看似完整、实则错位的模块。")
+
+h2(doc, "5.6　面试官模块")
+body(doc, "现有版本已经能依据简历生成六到八道题，每题附考察点与追问方向，并给出准备建议。升级为智能体后增加三件事：多轮追问，按回答质量调整难度；结束时给出结构化反馈，分别评价技术深度、表达清晰度与项目真实性；对简历中可能夸大或含糊的表述做压力测试，让用户在真实面试前先遇到一次。")
+body(doc, "这一功能的边界要说清楚。它不能预测真实面试题，作用是让用户把简历上写过的每一句话都过一遍，确认自己答得上来。")
+
+h2(doc, "5.7　技术难点与对策")
+add_table(doc, "表 7　主要技术难点",
+          ["难点", "具体表现", "对策"],
+          [["改写失真", "模型压缩时改掉时间、公司、数字", "事实字段白名单、结构化输出、回填前字段级比对"],
+           ["多轮失控", "上下文变长后前后矛盾，越改越偏", "以结构化状态为唯一事实源，对话只做增量修改"],
+           ["页数控制", "压缩后仍超出一页", "提示词先限字数，渲染后按实际页高校验，超限二次压缩"],
+           ["解析准确率", "复杂版式出现错位", "置信度分级、人工确认、分档支持"],
+           ["成本与滥用", "免费额度被反复消耗", "按 IP 限流，额度耗尽转自有 Key，限制单次请求长度"],
+           ["模型依赖", "接口变更或限流导致功能不可用", "服务层抽象模型地址与名称，可切换同格式其他模型"]],
+          [3.0, 5.4, 6.4])
+
+# ================= 第六章 =================
+h1(doc, "第六章　开发计划与团队分工")
+
+h2(doc, "6.1　阶段划分")
+body(doc, "平台部分已完成，智能体部分按四个阶段推进，每阶段有可验收的产出。")
+add_table(doc, "表 8　开发阶段与交付物",
+          ["阶段", "主要工作", "交付物", "周期"],
+          [["一　平台完善（已完成）", "模块化编辑、润色、压缩、导出、主题", "可用的单文件应用", "4 周"],
+           ["二　智能体内核", "工具集、编排层、对话式构建", "对话生成可编辑简历", "3 周"],
+           ["三　记忆与解析", "用户档案、PDF 与 Word 解析", "导入旧简历并继续编辑", "2 周"],
+           ["四　知识库与面试官", "岗位库、检索、多轮面试", "岗位建议与模拟面试", "2 周"],
+           ["五　测试与文档", "用例设计、兼容性检查、说明文档", "测试记录与使用说明", "1 周"]],
+          [4.2, 6.0, 3.6, 1.6])
+
+h2(doc, "6.2　里程碑")
+body(doc, "三个节点可作为验收依据：其一，能通过对话生成一份可编辑的简历；其二，能导入旧简历并保持模块结构不乱；其三，能针对定稿简历完成一轮带追问的模拟面试。前两项决定产品是否可用，第三项决定它是否比通用工具更好用。")
+
+h2(doc, "6.3　团队与分工")
+body(doc, "项目由本人独立完成，按职能拆开如下。这样拆分也便于在答辩时说明各部分的技术含量。")
+add_table(doc, "表 9　职能分工",
+          ["职能", "具体工作", "产出"],
+          [["产品设计", "需求梳理、流程图、界面结构与交互规则", "原型与本策划书"],
+           ["前端开发", "单文件应用、模块系统、A4 渲染、打印样式", "index.html"],
+           ["服务端", "代理函数、限流、密钥管理、部署配置", "chat.js 与部署配置"],
+           ["模型接入", "模块规则、压缩策略、结构化输出校验", "提示词模板"],
+           ["测试与文档", "用例设计、兼容性检查、说明文档", "测试记录与 README"]],
+          [2.6, 8.0, 4.2])
+
+# ================= 第七章 =================
+h1(doc, "第七章　推广与运营")
+
+h2(doc, "7.1　推广思路")
+body(doc, "不做广投放。这类工具的用户集中在校园，决策又依赖身边人推荐，所以先从可触达的圈层开始，跑通一个再往外扩。")
+body(doc, "一是校内先行。在班级和社团内试用，收集真实简历作为测试样本，同时把使用中暴露的问题修掉。二是开源引流。代码放在公开仓库，说明文档写清部署方式与免费额度规则；会自己部署的人不多，但他们是口碑的起点。三是内容侧。把“简历怎么写”的具体问题写成短帖，比发产品广告有效，选题直接来自用户的实际提问。")
+
+h2(doc, "7.2　运营节奏")
+add_table(doc, "表 10　运营节奏",
+          ["阶段", "时间", "主要动作", "目标"],
+          [["内测", "第 1 个月", "校内三十名用户，人工跟进每次使用", "收集五十份真实简历样本"],
+           ["开放", "第 2 至 3 个月", "公开访问链接，开放源码仓库", "日均活跃五十人，累计导出两百份"],
+           ["沉淀", "第 4 个月起", "建设岗位知识库，整理使用指南", "形成留存与自然传播"]],
+          [1.8, 3.0, 7.0, 3.0])
+
+h2(doc, "7.3　明确不做的三件事")
+body(doc, "边界比功能更能说明一个产品是什么。本项目不做付费墙，不做简历代写，不做简历库。前两条与“补全和改写”的定位一致，第三条是合规底线：用户简历不上传、不聚合、不用于训练。")
+
+# ================= 第八章 =================
+h1(doc, "第八章　可行性与成本")
+
+h2(doc, "8.1　技术可行性")
+body(doc, "核心链路已经在现有平台跑通：模块化数据结构、提示词组装、结构化返回与回填、A4 渲染与导出，这些不需要重新设计，智能体是在其上增加一层编排。工具调用、结构化输出、长上下文是目前主流模型都已具备的能力，不需要自研模型。服务端成本接近于零，Cloudflare Pages 与 KV 的免费额度足以支撑课程项目与初期试用。")
+body(doc, "主要不确定性在简历解析的准确率。它取决于文件的版式质量，而不是模型能力，这一点已经通过分档支持与人工确认做了兜底。")
+
+h2(doc, "8.2　成本估算")
+body(doc, "按现有提示词长度与返回长度实测，各类任务的 token 消耗大致如下。")
+add_table(doc, "表 11　单次任务成本估算",
+          ["任务", "输入 token", "输出 token", "说明"],
+          [["单模块润色", "约 600", "约 400", "只重写一个字段"],
+           ["整体压缩", "约 2500", "约 1200", "全模块文本，输出结构化结果"],
+           ["面试题生成", "约 1500", "约 800", "六至八题，含追问"],
+           ["对话式初稿", "约 2000", "约 1500", "多轮补全后成稿"]],
+          [3.6, 3.4, 3.4, 4.4])
+body(doc, "一份简历从初稿到定稿，通常经历三到五次改写加一次压缩，合计约 12000 至 18000 token。按当前定价折算，单份成本在几分钱量级。每个客户端每日 60000 token 的免费额度约合三到五份完整简历，够一个用户正常使用，不足以支撑批量生产，这个量级是刻意选的。")
+
+# ================= 第九章 =================
+h1(doc, "第九章　风险与应对")
+body(doc, "项目的主要风险不在技术实现，而在定位与合规。逐条列出并给出应对。")
+add_table(doc, "表 12　风险识别与应对",
+          ["风险", "影响", "应对"],
+          [["内容同质化", "改写后的简历趋于雷同，反而降低辨识度", "要求保留个人特有细节，提供风格档位，不鼓励全篇改写"],
+           ["代写争议", "被用于完全代写，偏离工具定位", "流程设计为补全与改写，事实字段始终要求用户填写"],
+           ["信息合规", "简历含手机号等个人信息", "正文不出本机，调用不落盘，导出由用户自行完成"],
+           ["模型波动", "返回格式不稳定导致回填失败", "强制结构化输出，解析失败重试，失败不写入"],
+           ["成本失控", "免费额度被脚本批量消耗", "按 IP 限流，限制单次请求长度，额度耗尽转自有 Key"],
+           ["单点依赖", "单一模型服务不可用", "服务层可切换兼容同格式的其他模型"]],
+          [2.8, 5.6, 6.4])
+
+# ================= 第十章 =================
+h1(doc, "第十章　预期成果与评价指标")
+
+h2(doc, "10.1　交付物")
+body(doc, "（1）可访问的 Web 应用。无需安装，支持完整编辑、压缩、导出与面试题生成。")
+body(doc, "（2）开源代码。以 MIT 协议开放，包含前端单文件、服务层函数与部署配置。")
+body(doc, "（3）文档。包括本策划书、使用说明与部署说明。")
+body(doc, "（4）答辩材料。功能演示、架构说明与技术要点。")
+
+h2(doc, "10.2　评价指标")
+body(doc, "指标要能验证，否则只是口号。下表的每一项都可以在测试阶段实测。")
+add_table(doc, "表 13　评价指标与目标值",
+          ["指标", "定义", "目标值"],
+          [["功能完成度", "策划书中 P0 与 P1 需求的上线比例", "100% 与 80%"],
+           ["生成成功率", "结构化返回可被正确解析并回填的比例", "不低于 95%"],
+           ["一页达成率", "压缩后内容不超过一页 A4 的比例", "不低于 85%"],
+           ["单份耗时", "从空白到导出 PDF 的中位时长", "不超过 25 分钟"],
+           ["任务完成率", "进入编辑页后成功导出 PDF 的用户比例", "不低于 60%"],
+           ["单份成本", "一份完整简历的平均 token 成本", "不超过 0.05 元"]],
+          [3.2, 7.8, 3.8])
+
+# ================= 第十一章 =================
+h1(doc, "第十一章　结语")
+body(doc, "简面要解决的问题很具体：让一个没写过简历的学生，在半小时内得到一份说得清楚、看得下去、经得起追问的简历。技术上它没有发明新东西，模型、托管、限流都是现成的，难点在于把这些零件按简历这个场景的约束组装起来：事实不能改，页数不能超，结果必须能编辑。")
+body(doc, "下一步的工作是把现有工具接上编排层，让它从“用户操作的工具”变成“能听懂需求的助手”。这也是本次课程设计希望验证的一件事：智能体的价值不完全取决于模型有多强，也取决于它是否愿意按一个具体场景的规矩做事。")
+
+# ================= 附录 =================
+h1(doc, "附录 A　关键参数")
+add_table(doc, "表 14　系统关键参数",
+          ["参数", "取值", "说明"],
+          [["页面尺寸", "A4，210 × 297mm", "与打印输出一致"],
+           ["模块数量", "8 类", "基本信息、肖像、教育、项目、实习、技能、荣誉、自评"],
+           ["主题数量", "6 套", "藏蓝、粉樱、暖阳橙、翡翠绿、魅影紫、青瓷蓝"],
+           ["免费额度", "60000 token / 客户端 / 日", "24 小时滚动窗口"],
+           ["压缩目标", "约 850 字", "项目与实习每段 2 至 3 条要点"],
+           ["面试题量", "6 至 8 道", "附考察点与追问方向"],
+           ["本地存储键", "jianmian_studio_v1 等", "简历正文与历史快照分开存放"],
+           ["许可协议", "MIT", "允许修改与商用"]],
+          [3.4, 5.0, 6.2])
+
+h1(doc, "附录 B　开源说明")
+body(doc, "项目以 MIT 协议开源，前端不依赖任何第三方库，服务层仅依赖 Cloudflare Pages 运行时，模型服务由 DeepSeek 提供。开放源码的目的有两个：一是让同样在找实习的同学可以自行部署，不必依赖他人的额度；二是让这套提示词与结构化回填的做法可以被复用到其他文档类场景。")
+
+doc.save(OUT)
+print("saved:", OUT)

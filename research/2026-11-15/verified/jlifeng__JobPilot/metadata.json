@@ -1,0 +1,18 @@
+{
+  "repo": "jlifeng/JobPilot",
+  "retrieved_at": "2026-11-15T09:29:36.477609+00:00",
+  "files": {
+    "README.md": {
+      "sha256": "fc67a057e36a201f3013bc7f61ca02d598d1fa328ef8ddd506b200ce64c0ff39",
+      "url": "https://raw.githubusercontent.com/jlifeng/JobPilot/45ef792ab8410ca20f3d6e02762da861a33f4b62/README.md"
+    },
+    "LICENSE": {
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "url": "https://raw.githubusercontent.com/jlifeng/JobPilot/45ef792ab8410ca20f3d6e02762da861a33f4b62/LICENSE"
+    }
+  },
+  "errors": [
+    "repository page: The read operation timed out"
+  ],
+  "ref": "45ef792ab8410ca20f3d6e02762da861a33f4b62"
+}

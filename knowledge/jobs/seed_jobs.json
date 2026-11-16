@@ -1,0 +1,150 @@
+{
+  "note": "课程演示用的公开岗位种子样本：只保留岗位要求的结构化摘要，不含任何真实简历或联系方式。样本量不足以代表市场，输出时必须带免责声明。",
+  "source": "公开 JD 要求摘要（人工整理，用于课程演示）",
+  "jobs": [
+    {
+      "id": "jd-py-backend-001",
+      "role": "Python 后端开发工程师",
+      "city": "深圳",
+      "seniority": "应届",
+      "skills": ["Python", "Flask", "MySQL", "Redis", "REST", "Linux", "Git"],
+      "description": "负责业务系统后端接口开发与维护；熟悉 Python Web 框架（Flask/Django/FastAPI 任一）；掌握 MySQL 索引与慢查询优化；了解 Redis 缓存与消息队列；能编写单元测试并参与 CI。",
+      "sourceName": "课程种子样本 · 招聘要求摘要",
+      "sourceUrl": "https://example.com/jobs/py-backend-001",
+      "publishedAt": "2026-09-01",
+      "expiresAt": "2027-06-30"
+    },
+    {
+      "id": "jd-py-backend-002",
+      "role": "Python 后端开发（AI 应用）",
+      "city": "杭州",
+      "seniority": "应届",
+      "skills": ["Python", "FastAPI", "PostgreSQL", "Docker", "LangChain", "REST", "单元测试"],
+      "description": "参与 AI 应用后端开发：封装模型调用、设计任务队列、实现流式接口；要求熟悉 FastAPI 与异步编程；了解 Docker 部署；对大模型调用成本与超时有基本认识。",
+      "sourceName": "课程种子样本 · 招聘要求摘要",
+      "sourceUrl": "https://example.com/jobs/py-backend-002",
+      "publishedAt": "2026-09-12",
+      "expiresAt": "2027-06-30"
+    },
+    {
+      "id": "jd-java-backend-001",
+      "role": "Java 后端开发工程师",
+      "city": "北京",
+      "seniority": "应届",
+      "skills": ["Java", "Spring Boot", "MySQL", "Redis", "Kubernetes", "Git"],
+      "description": "参与交易系统开发；熟悉 Spring Boot 与常用中间件；理解事务与幂等设计；能阅读英文技术文档；有分布式系统课程设计经验优先。",
+      "sourceName": "课程种子样本 · 招聘要求摘要",
+      "sourceUrl": "https://example.com/jobs/java-backend-001",
+      "publishedAt": "2026-08-20",
+      "expiresAt": "2027-03-31"
+    },
+    {
+      "id": "jd-frontend-001",
+      "role": "前端开发工程师",
+      "city": "上海",
+      "seniority": "应届",
+      "skills": ["JavaScript", "TypeScript", "Vue", "React", "HTML", "CSS", "Git"],
+      "description": "负责 Web 前端页面与组件开发；熟悉至少一种主流框架；理解浏览器渲染与性能优化；能与设计、后端协作完成联调。",
+      "sourceName": "课程种子样本 · 招聘要求摘要",
+      "sourceUrl": "https://example.com/jobs/frontend-001",
+      "publishedAt": "2026-09-05",
+      "expiresAt": "2027-06-30"
+    },
+    {
+      "id": "jd-algorithm-001",
+      "role": "算法工程师（推荐方向）",
+      "city": "北京",
+      "seniority": "硕士",
+      "skills": ["Python", "PyTorch", "机器学习", "深度学习", "NumPy", "Pandas", "算法"],
+      "description": "参与推荐系统召回与排序模型迭代；熟悉常见机器学习模型与评估指标；能独立完成离线实验与在线 A/B 分析；有论文或竞赛经历优先。",
+      "sourceName": "课程种子样本 · 招聘要求摘要",
+      "sourceUrl": "https://example.com/jobs/algorithm-001",
+      "publishedAt": "2026-07-18",
+      "expiresAt": "2027-06-30"
+    },
+    {
+      "id": "jd-data-001",
+      "role": "数据分析师",
+      "city": "广州",
+      "seniority": "应届",
+      "skills": ["SQL", "Python", "Pandas", "数据分析", "数据挖掘", "Excel"],
+      "description": "负责业务指标体系建设与日常分析报告；熟练使用 SQL 与 Python 处理数据；能把分析结论转成可执行的业务建议；具备良好的图表表达能力。",
+      "sourceName": "课程种子样本 · 招聘要求摘要",
+      "sourceUrl": "https://example.com/jobs/data-001",
+      "publishedAt": "2026-09-08",
+      "expiresAt": "2027-06-30"
+    },
+    {
+      "id": "jd-ml-001",
+      "role": "机器学习工程师",
+      "city": "深圳",
+      "seniority": "应届",
+      "skills": ["Python", "PyTorch", "深度学习", "NLP", "Docker", "Linux", "机器学习"],
+      "description": "负责模型训练、推理服务化与效果迭代；熟悉 Transformer 类模型；能把研究代码工程化为稳定服务；关注推理延迟与资源占用。",
+      "sourceName": "课程种子样本 · 招聘要求摘要",
+      "sourceUrl": "https://example.com/jobs/ml-001",
+      "publishedAt": "2026-08-02",
+      "expiresAt": "2027-06-30"
+    },
+    {
+      "id": "jd-test-001",
+      "role": "测试开发工程师",
+      "city": "成都",
+      "seniority": "应届",
+      "skills": ["Python", "单元测试", "CI/CD", "Linux", "Git", "SQL"],
+      "description": "负责接口自动化测试框架搭建与用例维护；熟悉 pytest 等测试框架；能定位问题根因并推动修复；了解持续集成流程。",
+      "sourceName": "课程种子样本 · 招聘要求摘要",
+      "sourceUrl": "https://example.com/jobs/test-001",
+      "publishedAt": "2026-09-20",
+      "expiresAt": "2027-06-30"
+    },
+    {
+      "id": "jd-ops-001",
+      "role": "运维开发工程师",
+      "city": "武汉",
+      "seniority": "应届",
+      "skills": ["Linux", "Docker", "Kubernetes", "Nginx", "Python", "CI/CD"],
+      "description": "负责服务部署、监控告警与故障处理；熟悉 Linux 常用排障手段；能编写运维脚本；了解容器编排与灰度发布。",
+      "sourceName": "课程种子样本 · 招聘要求摘要",
+      "sourceUrl": "https://example.com/jobs/ops-001",
+      "publishedAt": "2026-08-28",
+      "expiresAt": "2027-06-30"
+    },
+    {
+      "id": "jd-fullstack-001",
+      "role": "全栈开发工程师（实习）",
+      "city": "杭州",
+      "seniority": "实习",
+      "skills": ["Python", "Flask", "Vue", "MySQL", "Git", "REST", "HTML", "CSS"],
+      "description": "参与内部工具从 0 到 1 开发；能独立完成前后端联调；关注代码可读性与文档；每周到岗 4 天以上。",
+      "sourceName": "课程种子样本 · 招聘要求摘要",
+      "sourceUrl": "https://example.com/jobs/fullstack-001",
+      "publishedAt": "2026-10-01",
+      "expiresAt": "2027-01-31"
+    },
+    {
+      "id": "jd-product-001",
+      "role": "产品经理（AI 方向）",
+      "city": "北京",
+      "seniority": "应届",
+      "skills": ["需求分析", "数据分析", "Axure", "SQL", "用户研究"],
+      "description": "负责 AI 功能的需求定义与效果评估；能把模糊需求拆成可验收的指标；有技术背景或能读懂接口文档优先。",
+      "sourceName": "课程种子样本 · 招聘要求摘要",
+      "sourceUrl": "https://example.com/jobs/product-001",
+      "publishedAt": "2026-09-15",
+      "expiresAt": "2027-06-30"
+    },
+    {
+      "id": "jd-embedded-001",
+      "role": "嵌入式软件工程师",
+      "city": "西安",
+      "seniority": "应届",
+      "skills": ["C++", "C", "Linux", "Git", "算法"],
+      "description": "负责嵌入式设备驱动与应用开发；熟悉 C/C++ 与常见通信协议；能使用示波器与调试器定位问题；有竞赛经历优先。",
+      "sourceName": "课程种子样本 · 招聘要求摘要",
+      "sourceUrl": "https://example.com/jobs/embedded-001",
+      "publishedAt": "2026-07-30",
+      "expiresAt": "2027-06-30"
+    }
+  ]
+}

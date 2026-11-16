@@ -1,0 +1,11 @@
+# 统一换行，避免 Windows 上提交整文件 diff
+* text=auto eol=lf
+
+# 源文档与图片按二进制处理
+*.docx binary
+*.pdf  binary
+*.png  binary
+*.sqlite3 binary
+
+# 脚本保持原样
+*.ps1 text eol=crlf

@@ -1,0 +1,15 @@
+{
+  "repo": "mozilla/pdf.js",
+  "retrieved_at": "2026-11-15T09:28:20.772055+00:00",
+  "files": {
+    "LICENSE": {
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "url": "https://raw.githubusercontent.com/mozilla/pdf.js/d60bc7426aa0968d5b95ff8ca3a76dbc6ce23a3a/LICENSE"
+    }
+  },
+  "errors": [
+    "repository page: <urlopen error timed out>",
+    "README.md: <urlopen error timed out>"
+  ],
+  "ref": "d60bc7426aa0968d5b95ff8ca3a76dbc6ce23a3a"
+}

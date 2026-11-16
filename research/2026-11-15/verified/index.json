@@ -1,0 +1,215 @@
+[
+  {
+    "repo": "coze-dev/coze-studio",
+    "retrieved_at": "2026-11-15T09:26:19.621139+00:00",
+    "files": {},
+    "errors": [
+      "README.md: <urlopen error timed out>",
+      "LICENSE: <urlopen error timed out>"
+    ],
+    "ref": "fefb05ff27be1da939612fbf9faf5db62583b8ae"
+  },
+  {
+    "repo": "agno-agi/agno",
+    "retrieved_at": "2026-11-15T09:26:19.621139+00:00",
+    "files": {},
+    "errors": [
+      "README.md: <urlopen error timed out>",
+      "LICENSE: <urlopen error timed out>"
+    ],
+    "ref": "7c3b729667e66282f0d845adbd507ee07242c5eb"
+  },
+  {
+    "repo": "langgenius/dify",
+    "retrieved_at": "2026-11-15T09:26:19.621139+00:00",
+    "files": {},
+    "errors": [
+      "README.md: <urlopen error timed out>",
+      "LICENSE: <urlopen error timed out>"
+    ],
+    "ref": "61c8c3b2fed86b77da2ac9486e673852b7cea648"
+  },
+  {
+    "repo": "openai/openai-agents-python",
+    "retrieved_at": "2026-11-15T09:26:19.621139+00:00",
+    "files": {},
+    "errors": [
+      "README.md: <urlopen error timed out>",
+      "LICENSE: <urlopen error timed out>"
+    ],
+    "ref": "64fbde5d02b42ae5f9db668eb0184cdb3fc9d775"
+  },
+  {
+    "repo": "langchain-ai/langgraph",
+    "retrieved_at": "2026-11-15T09:26:19.616950+00:00",
+    "files": {},
+    "errors": [
+      "README.md: <urlopen error timed out>",
+      "LICENSE: <urlopen error timed out>"
+    ],
+    "ref": "08a2016953789a4f579b4d36bd1967941ec62012"
+  },
+  {
+    "repo": "pydantic/pydantic-ai",
+    "retrieved_at": "2026-11-15T09:26:19.616950+00:00",
+    "files": {},
+    "errors": [
+      "README.md: <urlopen error timed out>",
+      "LICENSE: <urlopen error timed out>"
+    ],
+    "ref": "f93bcff0c72caa0d5b0e2ead8b550d9674c8c9c4"
+  },
+  {
+    "repo": "AmruthPillai/Reactive-Resume",
+    "retrieved_at": "2026-11-15T09:28:20.630613+00:00",
+    "files": {
+      "LICENSE": {
+        "sha256": "d7839f5fa862720b1501a54bcc0d6a2566b59cee221738640bf1508630f73cc1",
+        "url": "https://raw.githubusercontent.com/AmruthPillai/Reactive-Resume/418c71d3a8ed4dcf6e48ecceb94fec8f41b576d9/LICENSE"
+      }
+    },
+    "errors": [
+      "repository page: <urlopen error timed out>",
+      "README.md: <urlopen error timed out>"
+    ],
+    "ref": "418c71d3a8ed4dcf6e48ecceb94fec8f41b576d9"
+  },
+  {
+    "repo": "mozilla/pdf.js",
+    "retrieved_at": "2026-11-15T09:28:20.772055+00:00",
+    "files": {
+      "LICENSE": {
+        "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+        "url": "https://raw.githubusercontent.com/mozilla/pdf.js/d60bc7426aa0968d5b95ff8ca3a76dbc6ce23a3a/LICENSE"
+      }
+    },
+    "errors": [
+      "repository page: <urlopen error timed out>",
+      "README.md: <urlopen error timed out>"
+    ],
+    "ref": "d60bc7426aa0968d5b95ff8ca3a76dbc6ce23a3a"
+  },
+  {
+    "repo": "srbhr/Resume-Matcher",
+    "retrieved_at": "2026-11-15T09:28:20.694390+00:00",
+    "files": {
+      "LICENSE": {
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "url": "https://raw.githubusercontent.com/srbhr/Resume-Matcher/e2a32b6823bb7f5996cafdf007b6ba6f0efd8f98/LICENSE"
+      }
+    },
+    "errors": [
+      "repository page: <urlopen error timed out>",
+      "README.md: <urlopen error timed out>"
+    ],
+    "ref": "e2a32b6823bb7f5996cafdf007b6ba6f0efd8f98"
+  },
+  {
+    "repo": "xitanggg/open-resume",
+    "retrieved_at": "2026-11-15T09:28:20.662180+00:00",
+    "files": {
+      "LICENSE": {
+        "sha256": "20b067f86de375aae6db0f283ab2e65de24d537733b89bd58432c101259d84cf",
+        "url": "https://raw.githubusercontent.com/xitanggg/open-resume/4f8255a2c763479837f69f1dccf2a3338730cd79/LICENSE"
+      }
+    },
+    "errors": [
+      "repository page: <urlopen error timed out>",
+      "README.md: <urlopen error timed out>"
+    ],
+    "ref": "4f8255a2c763479837f69f1dccf2a3338730cd79"
+  },
+  {
+    "repo": "docling-project/docling",
+    "retrieved_at": "2026-11-15T09:28:20.863622+00:00",
+    "files": {
+      "LICENSE": {
+        "sha256": "edb765d1e3e60d0c7a7d5fba5f2bb2c3c29f7465cecb5c22cf1185c884954e4c",
+        "url": "https://raw.githubusercontent.com/docling-project/docling/HEAD/LICENSE"
+      }
+    },
+    "errors": [
+      "repository page: <urlopen error timed out>",
+      "README.md: <urlopen error timed out>"
+    ],
+    "ref": "HEAD"
+  },
+  {
+    "repo": "danielvolchek/ResuLLMe",
+    "retrieved_at": "2026-11-15T09:28:20.694390+00:00",
+    "files": {},
+    "errors": [
+      "repository page: <urlopen error timed out>",
+      "README.md: <urlopen error timed out>"
+    ],
+    "ref": "HEAD"
+  },
+  {
+    "repo": "microsoft/markitdown",
+    "retrieved_at": "2026-11-15T09:29:36.305317+00:00",
+    "files": {
+      "README.md": {
+        "sha256": "7d27ea30126c35a18fb7392454a30da72f62def2cc0cd222926e6207ac82a9d8",
+        "url": "https://raw.githubusercontent.com/microsoft/markitdown/ed178952a6672abdfd35b5f9e76a80b6cefc086e/README.md"
+      },
+      "LICENSE": {
+        "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+        "url": "https://raw.githubusercontent.com/microsoft/markitdown/ed178952a6672abdfd35b5f9e76a80b6cefc086e/LICENSE"
+      }
+    },
+    "errors": [
+      "repository page: The read operation timed out"
+    ],
+    "ref": "ed178952a6672abdfd35b5f9e76a80b6cefc086e"
+  },
+  {
+    "repo": "jlifeng/JobPilot",
+    "retrieved_at": "2026-11-15T09:29:36.477609+00:00",
+    "files": {
+      "README.md": {
+        "sha256": "fc67a057e36a201f3013bc7f61ca02d598d1fa328ef8ddd506b200ce64c0ff39",
+        "url": "https://raw.githubusercontent.com/jlifeng/JobPilot/45ef792ab8410ca20f3d6e02762da861a33f4b62/README.md"
+      },
+      "LICENSE": {
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "url": "https://raw.githubusercontent.com/jlifeng/JobPilot/45ef792ab8410ca20f3d6e02762da861a33f4b62/LICENSE"
+      }
+    },
+    "errors": [
+      "repository page: The read operation timed out"
+    ],
+    "ref": "45ef792ab8410ca20f3d6e02762da861a33f4b62"
+  },
+  {
+    "repo": "AlanYy-42/JD-Scout",
+    "retrieved_at": "2026-11-15T09:29:36.591483+00:00",
+    "files": {
+      "README.md": {
+        "sha256": "89f30154d3865fd33fc6a0a2ddd9b4267822d9b2b8401df7f3830ffcf54dd43d",
+        "url": "https://raw.githubusercontent.com/AlanYy-42/JD-Scout/b0c4e679bd4d33c44d095a1b3cfce1dd173ea358/README.md"
+      },
+      "LICENSE": {
+        "sha256": "7bee5039cd1cded13f2180d4ae17ea374da20f872056cbf1182834a3dc526771",
+        "url": "https://raw.githubusercontent.com/AlanYy-42/JD-Scout/b0c4e679bd4d33c44d095a1b3cfce1dd173ea358/LICENSE"
+      }
+    },
+    "errors": [
+      "repository page: The read operation timed out"
+    ],
+    "ref": "b0c4e679bd4d33c44d095a1b3cfce1dd173ea358"
+  },
+  {
+    "repo": "Programmergyt/ai-career-copilot",
+    "retrieved_at": "2026-11-15T09:29:36.607196+00:00",
+    "files": {
+      "README.md": {
+        "sha256": "dfd4c446a0e41b3a8497fa32d6ce676f98bbec825660d3537294d461014f7b99",
+        "url": "https://raw.githubusercontent.com/Programmergyt/ai-career-copilot/721a54d8f38053a784690b9e5cb06e0f01de75f4/README.md"
+      }
+    },
+    "errors": [
+      "repository page: <urlopen error timed out>"
+    ],
+    "ref": "721a54d8f38053a784690b9e5cb06e0f01de75f4"
+  }
+]

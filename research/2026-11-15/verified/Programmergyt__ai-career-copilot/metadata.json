@@ -1,0 +1,14 @@
+{
+  "repo": "Programmergyt/ai-career-copilot",
+  "retrieved_at": "2026-11-15T09:29:36.607196+00:00",
+  "files": {
+    "README.md": {
+      "sha256": "dfd4c446a0e41b3a8497fa32d6ce676f98bbec825660d3537294d461014f7b99",
+      "url": "https://raw.githubusercontent.com/Programmergyt/ai-career-copilot/721a54d8f38053a784690b9e5cb06e0f01de75f4/README.md"
+    }
+  },
+  "errors": [
+    "repository page: <urlopen error timed out>"
+  ],
+  "ref": "721a54d8f38053a784690b9e5cb06e0f01de75f4"
+}

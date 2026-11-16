@@ -1,0 +1,10 @@
+{
+  "repo": "pydantic/pydantic-ai",
+  "retrieved_at": "2026-11-15T09:26:19.616950+00:00",
+  "files": {},
+  "errors": [
+    "README.md: <urlopen error timed out>",
+    "LICENSE: <urlopen error timed out>"
+  ],
+  "ref": "f93bcff0c72caa0d5b0e2ead8b550d9674c8c9c4"
+}

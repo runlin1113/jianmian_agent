@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>简面 · 简历智能体</title>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/css/app.css" />
+</head>
+<body data-nav="chat">
+
+<div class="app">
+  <!-- ---------------------------------------------------------------- 左侧：任务栏 + 历史 -->
+  <aside class="rail">
+    <div class="rail-brand">
+      <button class="logo" id="logoBtn" type="button" title="回到对话">
+        <span class="logo-mark">简</span><span class="logo-text">简面</span>
+      </button>
+    </div>
+
+    <nav class="rail-nav" id="railNav" aria-label="任务栏">
+      <button class="rail-item" type="button" data-nav="interview">面试</button>
+      <button class="rail-item" type="button" data-nav="research">调研</button>
+      <button class="rail-item" type="button" data-nav="workspace">工作台</button>
+      <button class="rail-item" type="button" data-nav="archive">档案</button>
+    </nav>
+
+    <button class="new-chat" id="newChatBtn" type="button">
+      <span class="plus" aria-hidden="true">＋</span>新对话
+    </button>
+
+    <div class="rail-hist" id="historyList" aria-label="对话历史"></div>
+
+    <button class="rail-me" id="meBtn" type="button">
+      <span class="avatar" aria-hidden="true">我</span>
+      <span class="me-text">个人设置</span>
+    </button>
+  </aside>
+
+  <!-- ---------------------------------------------------------------- 主区域 -->
+  <main class="main">
+
+    <!-- 对话 -->
+    <section class="view view-chat" data-page="chat" data-state="empty">
+      <div class="chat-scroll" id="chatScroll"></div>
+      <div class="chat-bottom">
+        <h1 class="hero" id="hero">好的简历，只用一面</h1>
+        <form class="composer" id="composer" autocomplete="off">
+          <div class="composer-box" id="composerBox">
+            <textarea id="composerInput" rows="1" maxlength="4000"
+              placeholder="说说你的经历，或者告诉我这份简历要怎么改"></textarea>
+            <button class="send" id="sendBtn" type="submit" aria-label="发送" title="发送（Enter）">
+              <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+                <path d="M12 19.5V5M12 5l-6.2 6.2M12 5l6.2 6.2" fill="none" stroke="currentColor"
+                  stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+          <div class="composer-tools">
+            <button class="tool" id="attachBtn" type="button">＋ 导入旧简历</button>
+            <button class="tool" id="sampleBtn" type="button">看一份示例</button>
+            <button class="tool" id="stopBtn" type="button" hidden>停止</button>
+            <span class="tool-note" id="chatStatus"></span>
+          </div>
+        </form>
+        <p class="hero-note">数字与日期不会被改写 · 简历只存在你的浏览器里</p>
+      </div>
+    </section>
+
+    <!-- 工作台 -->
+    <section class="view view-work" data-page="workspace">
+      <header class="wb-bar">
+        <button class="tool" id="backToChatBtn" type="button">← 对话</button>
+        <span class="wb-info" id="pageInfo">1 页</span>
+        <span class="wb-warn" id="overflowInfo" hidden></span>
+        <div class="spacer"></div>
+        <label class="mini-field">
+          <span>模板</span>
+          <select id="templateSelect" aria-label="选择模板"></select>
+        </label>
+        <label class="mini-field">
+          <span>主题</span>
+          <select id="themeSelect" aria-label="选择主题"></select>
+        </label>
+        <label class="mini-field">
+          <span>篇幅</span>
+          <select id="densitySelect" aria-label="选择篇幅">
+            <option value="concise">精简</option>
+            <option value="balanced">平衡</option>
+            <option value="detailed">详细</option>
+          </select>
+        </label>
+        <span class="wb-divider"></span>
+        <button class="tool" id="undoBtn" type="button" title="撤销（Ctrl+Z）">撤销</button>
+        <button class="tool" id="redoBtn" type="button" title="重做（Ctrl+Shift+Z）">重做</button>
+        <button class="tool tool-strong" id="printBtn" type="button" title="打印或导出 PDF（Ctrl+P）">打印 / PDF</button>
+      </header>
+
+      <div class="wb-body">
+        <!-- 左：模块库 -->
+        <aside class="wb-palette">
+          <div class="pal-head">
+            <span>模块库</span>
+            <span class="pal-count" id="palCount"></span>
+          </div>
+          <div class="pal-grid" id="paletteGrid"></div>
+          <div class="pal-head pal-head-sub">
+            <span>已编辑</span>
+          </div>
+          <div class="pal-list" id="moduleList"></div>
+          <div class="pal-empty" id="moduleEmpty" hidden>
+            还没有模块。点上面的模块库添加，或回到对话说一句经历。
+          </div>
+        </aside>
+
+        <!-- 中：A4 -->
+        <section class="wb-canvas">
+          <div class="preview-scroll" id="previewScroll">
+            <div class="preview-stack" id="previewStack"></div>
+          </div>
+          <div class="wb-zoom">
+            <button class="tool icon" id="zoomOut" type="button" aria-label="缩小">−</button>
+            <span id="zoomLabel">75%</span>
+            <button class="tool icon" id="zoomIn" type="button" aria-label="放大">＋</button>
+          </div>
+        </section>
+
+        <!-- 右：编辑 · 某段 -->
+        <aside class="wb-inspector">
+          <div class="insp-head">
+            <span>编辑 · <b id="inspTitle">简历</b></span>
+            <span class="insp-sub" id="inspSub"></span>
+          </div>
+          <div class="insp-body" id="inspFields"></div>
+          <div class="insp-agent">
+            <div class="insp-agent-head">让智能体修改</div>
+            <textarea id="agentInput" rows="2" maxlength="600"
+              placeholder="例如：把这段写得更专业，突出我负责的部分"></textarea>
+            <button class="agent-btn" id="agentModifyBtn" type="button">让智能体修改</button>
+            <p class="insp-agent-note" id="agentNote">会把这句话带回对话，改完你在提案里逐项确认。</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 面试 -->
+    <section class="view view-simple" data-page="interview">
+      <div class="simple-inner">
+        <header class="simple-head">
+          <h2>模拟面试</h2>
+          <p>按主题逐轮追问，最多两轮追问后换主题。评分是规则基线加原文引用，不是「AI 打分」。</p>
+        </header>
+        <div class="field-row">
+          <label class="field">
+            <span>目标岗位</span>
+            <input id="ivJobInput" type="text" placeholder="例如 Python 后端开发" maxlength="80" />
+          </label>
+          <button class="agent-btn" id="ivStartBtn" type="button">开始面试</button>
+        </div>
+        <div class="meta-line" id="ivProgress" hidden></div>
+        <div class="iv-thread" id="ivThread"></div>
+        <div class="iv-answer" id="ivAnswerBox" hidden>
+          <textarea id="ivAnswer" rows="4" maxlength="4000" placeholder="用 STAR 说清：情境、你的动作、结果"></textarea>
+          <div class="row-actions">
+            <button class="agent-btn" id="ivSendBtn" type="button">提交回答</button>
+            <span class="muted" id="ivCounter"></span>
+          </div>
+        </div>
+        <div class="result-block" id="ivReport"></div>
+      </div>
+    </section>
+
+    <!-- 调研 -->
+    <section class="view view-simple" data-page="research">
+      <div class="simple-inner">
+        <header class="simple-head">
+          <h2>岗位调研</h2>
+          <p>对照检索到的岗位样本与你的原文，给三档证据结论；样本少时会明确说明，不当作市场结论。</p>
+        </header>
+        <div class="field-row">
+          <label class="field">
+            <span>目标岗位</span>
+            <input id="jobInput" type="text" placeholder="例如 Python 后端开发" maxlength="80" />
+          </label>
+          <label class="field">
+            <span>城市（可选）</span>
+            <input id="cityInput" type="text" placeholder="例如 杭州" maxlength="40" />
+          </label>
+          <button class="agent-btn" id="matchBtn" type="button">分析匹配度</button>
+        </div>
+        <div class="result-block" id="jobResult"></div>
+      </div>
+    </section>
+
+    <!-- 档案 -->
+    <section class="view view-simple" data-page="archive">
+      <div class="simple-inner">
+        <header class="simple-head">
+          <h2>我的档案</h2>
+          <p id="profileNote">候选事实必须由你确认才会保存；服务端只保留会话级临时档案，长期档案在你的浏览器里。</p>
+        </header>
+        <label class="field">
+          <span>从一段话里提取候选事实</span>
+          <textarea id="memoryText" rows="3" placeholder="例如：我熟悉 Flask，做过选课系统，想投 Python 后端"></textarea>
+        </label>
+        <div class="row-actions">
+          <button class="agent-btn" id="extractBtn" type="button">提取候选</button>
+        </div>
+        <div class="candidate-list" id="memoryCandidates"></div>
+        <h3 class="sub-head">已确认事实</h3>
+        <ul class="fact-list" id="factList"></ul>
+        <div class="row-actions">
+          <button class="tool" id="exportBtn" type="button">导出 JSON 备份</button>
+          <button class="tool" id="importJsonBtn" type="button">从 JSON 恢复</button>
+          <input type="file" id="jsonInput" accept=".json" hidden />
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- 导入旧简历：从任何页面都能唤起，合并后才写进简历 -->
+<div class="modal" id="importModal" hidden>
+  <div class="modal-card">
+    <div class="modal-head">
+      <b>导入旧简历</b>
+      <button class="tool icon" id="importCloseBtn" type="button" aria-label="关闭">✕</button>
+    </div>
+    <p class="modal-note">解析结果只进暂存区。你逐条确认后才会合并进简历，解析不到的内容不会被编造。</p>
+    <label class="dropzone" id="dropzone">
+      <input type="file" id="fileInput" accept=".pdf,.docx" hidden />
+      <strong>点击选择或拖入 PDF / DOCX</strong>
+      <span>上限 10 MB，PDF 最多 20 页；扫描件会提示需要手动校对</span>
+    </label>
+    <div class="meta-line" id="importMeta" hidden></div>
+    <div class="candidate-list" id="importCandidates"></div>
+    <div class="row-actions" id="importActions" hidden>
+      <button class="agent-btn" id="mergeImportBtn" type="button">合并选中项</button>
+      <button class="tool" id="discardImportBtn" type="button">放弃本次导入</button>
+    </div>
+  </div>
+</div>
+
+<!-- 个人设置 -->
+<div class="modal" id="settingsModal" hidden>
+  <div class="modal-card">
+    <div class="modal-head">
+      <b>个人设置</b>
+      <button class="tool icon" id="settingsCloseBtn" type="button" aria-label="关闭">✕</button>
+    </div>
+    <div class="set-row">
+      <span>模型</span>
+      <b id="settingsModel">离线确定性模式</b>
+    </div>
+    <p class="modal-note">离线模式不需要 Key，同一句话永远得到同一个结果；接真实模型后语义改写更自然，但事实守卫仍然生效。</p>
+    <label class="set-row set-check">
+      <input type="checkbox" id="byokToggle" />
+      <span>用我自己的 Key（只存在本次会话内存里，不落盘）</span>
+    </label>
+    <input type="password" id="byokKey" placeholder="sk-…" hidden autocomplete="off" />
+    <div class="set-row">
+      <span>默认缩放</span>
+      <b id="settingsZoom">75%</b>
+    </div>
+    <div class="row-actions">
+      <button class="tool" id="clearLocalBtn" type="button">清空本地数据</button>
+      <span class="muted" id="settingsFoot"></span>
+    </div>
+  </div>
+</div>
+
+<div class="toast-host" id="toastHost" aria-live="polite"></div>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

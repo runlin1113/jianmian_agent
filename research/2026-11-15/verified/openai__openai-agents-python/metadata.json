@@ -1,0 +1,10 @@
+{
+  "repo": "openai/openai-agents-python",
+  "retrieved_at": "2026-11-15T09:26:19.621139+00:00",
+  "files": {},
+  "errors": [
+    "README.md: <urlopen error timed out>",
+    "LICENSE: <urlopen error timed out>"
+  ],
+  "ref": "64fbde5d02b42ae5f9db668eb0184cdb3fc9d775"
+}

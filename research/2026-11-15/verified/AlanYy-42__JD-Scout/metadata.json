@@ -1,0 +1,18 @@
+{
+  "repo": "AlanYy-42/JD-Scout",
+  "retrieved_at": "2026-11-15T09:29:36.591483+00:00",
+  "files": {
+    "README.md": {
+      "sha256": "89f30154d3865fd33fc6a0a2ddd9b4267822d9b2b8401df7f3830ffcf54dd43d",
+      "url": "https://raw.githubusercontent.com/AlanYy-42/JD-Scout/b0c4e679bd4d33c44d095a1b3cfce1dd173ea358/README.md"
+    },
+    "LICENSE": {
+      "sha256": "7bee5039cd1cded13f2180d4ae17ea374da20f872056cbf1182834a3dc526771",
+      "url": "https://raw.githubusercontent.com/AlanYy-42/JD-Scout/b0c4e679bd4d33c44d095a1b3cfce1dd173ea358/LICENSE"
+    }
+  },
+  "errors": [
+    "repository page: The read operation timed out"
+  ],
+  "ref": "b0c4e679bd4d33c44d095a1b3cfce1dd173ea358"
+}

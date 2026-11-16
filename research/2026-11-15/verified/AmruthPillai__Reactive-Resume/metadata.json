@@ -1,0 +1,15 @@
+{
+  "repo": "AmruthPillai/Reactive-Resume",
+  "retrieved_at": "2026-11-15T09:28:20.630613+00:00",
+  "files": {
+    "LICENSE": {
+      "sha256": "d7839f5fa862720b1501a54bcc0d6a2566b59cee221738640bf1508630f73cc1",
+      "url": "https://raw.githubusercontent.com/AmruthPillai/Reactive-Resume/418c71d3a8ed4dcf6e48ecceb94fec8f41b576d9/LICENSE"
+    }
+  },
+  "errors": [
+    "repository page: <urlopen error timed out>",
+    "README.md: <urlopen error timed out>"
+  ],
+  "ref": "418c71d3a8ed4dcf6e48ecceb94fec8f41b576d9"
+}

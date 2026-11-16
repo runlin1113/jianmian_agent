@@ -1,0 +1,10 @@
+{
+  "repo": "agno-agi/agno",
+  "retrieved_at": "2026-11-15T09:26:19.621139+00:00",
+  "files": {},
+  "errors": [
+    "README.md: <urlopen error timed out>",
+    "LICENSE: <urlopen error timed out>"
+  ],
+  "ref": "7c3b729667e66282f0d845adbd507ee07242c5eb"
+}

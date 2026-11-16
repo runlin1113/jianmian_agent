@@ -1,0 +1,15 @@
+{
+  "repo": "srbhr/Resume-Matcher",
+  "retrieved_at": "2026-11-15T09:28:20.694390+00:00",
+  "files": {
+    "LICENSE": {
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "url": "https://raw.githubusercontent.com/srbhr/Resume-Matcher/e2a32b6823bb7f5996cafdf007b6ba6f0efd8f98/LICENSE"
+    }
+  },
+  "errors": [
+    "repository page: <urlopen error timed out>",
+    "README.md: <urlopen error timed out>"
+  ],
+  "ref": "e2a32b6823bb7f5996cafdf007b6ba6f0efd8f98"
+}

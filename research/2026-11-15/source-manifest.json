@@ -1,0 +1,429 @@
+{
+  "date": "2026-11-15",
+  "generated_at": "2026-11-15T09:55:29.818972+00:00",
+  "method": "Public repository metadata, Git refs, README and LICENSE snapshots; no upstream application execution. Branch snapshots are not asserted identical to independently observed commits.",
+  "repos": [
+    {
+      "repo": "agno-agi/agno",
+      "url": "https://github.com/agno-agi/agno",
+      "observed_commits": [
+        "7c3b729667e66282f0d845adbd507ee07242c5eb"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/official/agno-agi__agno/README.md",
+          "source_url": "https://raw.githubusercontent.com/agno-agi/agno/7c3b729667e66282f0d845adbd507ee07242c5eb/README.md",
+          "retrieved_at": "2026-11-15T09:32:44.4983235+00:00",
+          "sha256": "12dd410bfe18679095d2b63fe0cd0852d4e60c47d9b53245d2237836c1eedcae",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/branch_sources/agno-agi__agno/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/agno-agi/agno/refs/heads/main/LICENSE",
+          "retrieved_at": "2026-11-15T09:46:32.7361519+00:00",
+          "sha256": "7504bf0fe32a486487ec309d5ef30597ca87d2508450be380f6ef4772c3371ca",
+          "reference_type": "branch"
+        }
+      ]
+    },
+    {
+      "repo": "AlanYy-42/JD-Scout",
+      "url": "https://github.com/AlanYy-42/JD-Scout",
+      "observed_commits": [
+        "b0c4e679bd4d33c44d095a1b3cfce1dd173ea358"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/verified/AlanYy-42__JD-Scout/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/AlanYy-42/JD-Scout/b0c4e679bd4d33c44d095a1b3cfce1dd173ea358/LICENSE",
+          "retrieved_at": "2026-11-15T09:29:36.591483+00:00",
+          "sha256": "7bee5039cd1cded13f2180d4ae17ea374da20f872056cbf1182834a3dc526771",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/verified/AlanYy-42__JD-Scout/README.md",
+          "source_url": "https://raw.githubusercontent.com/AlanYy-42/JD-Scout/b0c4e679bd4d33c44d095a1b3cfce1dd173ea358/README.md",
+          "retrieved_at": "2026-11-15T09:29:36.591483+00:00",
+          "sha256": "89f30154d3865fd33fc6a0a2ddd9b4267822d9b2b8401df7f3830ffcf54dd43d",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/official/AlanYy-42__JD-Scout/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/AlanYy-42/JD-Scout/b0c4e679bd4d33c44d095a1b3cfce1dd173ea358/LICENSE",
+          "retrieved_at": "2026-11-15T09:39:03.4371152+00:00",
+          "sha256": "7bee5039cd1cded13f2180d4ae17ea374da20f872056cbf1182834a3dc526771",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/official/AlanYy-42__JD-Scout/README.md",
+          "source_url": "https://raw.githubusercontent.com/AlanYy-42/JD-Scout/b0c4e679bd4d33c44d095a1b3cfce1dd173ea358/README.md",
+          "retrieved_at": "2026-11-15T09:39:03.4371152+00:00",
+          "sha256": "89f30154d3865fd33fc6a0a2ddd9b4267822d9b2b8401df7f3830ffcf54dd43d",
+          "reference_type": "recorded_ref"
+        }
+      ]
+    },
+    {
+      "repo": "AmruthPillai/Reactive-Resume",
+      "url": "https://github.com/AmruthPillai/Reactive-Resume",
+      "observed_commits": [
+        "418c71d3a8ed4dcf6e48ecceb94fec8f41b576d9"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/verified/AmruthPillai__Reactive-Resume/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/AmruthPillai/Reactive-Resume/418c71d3a8ed4dcf6e48ecceb94fec8f41b576d9/LICENSE",
+          "retrieved_at": "2026-11-15T09:28:20.630613+00:00",
+          "sha256": "d7839f5fa862720b1501a54bcc0d6a2566b59cee221738640bf1508630f73cc1",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/branch_sources/AmruthPillai__Reactive-Resume/README.md",
+          "source_url": "https://raw.githubusercontent.com/AmruthPillai/Reactive-Resume/refs/heads/main/README.md",
+          "retrieved_at": "2026-11-15T09:46:31.8336155+00:00",
+          "sha256": "8ef0e668acbdc9b199c97c4d471a1fb339bfb533844f73c8ad818b99add113d1",
+          "reference_type": "branch"
+        }
+      ]
+    },
+    {
+      "repo": "coze-dev/coze-studio",
+      "url": "https://github.com/coze-dev/coze-studio",
+      "observed_commits": [
+        "fefb05ff27be1da939612fbf9faf5db62583b8ae"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/branch_sources/coze-dev__coze-studio/README.md",
+          "source_url": "https://raw.githubusercontent.com/coze-dev/coze-studio/refs/heads/main/README.md",
+          "retrieved_at": "2026-11-15T09:46:31.1826332+00:00",
+          "sha256": "eb88f0ea792ec66d2c68eb76e36749deea4340e834eccff8ced4254639a0296e",
+          "reference_type": "branch"
+        }
+      ]
+    },
+    {
+      "repo": "danielvolchek/ResuLLMe",
+      "url": "https://github.com/danielvolchek/ResuLLMe",
+      "observed_commits": [],
+      "files": []
+    },
+    {
+      "repo": "docling-project/docling",
+      "url": "https://github.com/docling-project/docling",
+      "observed_commits": [
+        "440492ac0d0e14952b32dda28fede7495611c899"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/verified/docling-project__docling/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/docling-project/docling/HEAD/LICENSE",
+          "retrieved_at": "2026-11-15T09:28:20.863622+00:00",
+          "sha256": "edb765d1e3e60d0c7a7d5fba5f2bb2c3c29f7465cecb5c22cf1185c884954e4c",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/branch_sources/docling-project__docling/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/docling-project/docling/refs/heads/main/LICENSE",
+          "retrieved_at": "2026-11-15T09:46:32.6928805+00:00",
+          "sha256": "edb765d1e3e60d0c7a7d5fba5f2bb2c3c29f7465cecb5c22cf1185c884954e4c",
+          "reference_type": "branch"
+        },
+        {
+          "path": "research/2026-11-15/branch_sources/docling-project__docling/README.md",
+          "source_url": "https://raw.githubusercontent.com/docling-project/docling/refs/heads/main/README.md",
+          "retrieved_at": "2026-11-15T09:46:32.6928805+00:00",
+          "sha256": "7640889422b17366a6d4420d2f631575c06facac391e5221fb177291e8665efe",
+          "reference_type": "branch"
+        }
+      ]
+    },
+    {
+      "repo": "jlifeng/JobPilot",
+      "url": "https://github.com/jlifeng/JobPilot",
+      "observed_commits": [
+        "45ef792ab8410ca20f3d6e02762da861a33f4b62"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/verified/jlifeng__JobPilot/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/jlifeng/JobPilot/45ef792ab8410ca20f3d6e02762da861a33f4b62/LICENSE",
+          "retrieved_at": "2026-11-15T09:29:36.477609+00:00",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/verified/jlifeng__JobPilot/README.md",
+          "source_url": "https://raw.githubusercontent.com/jlifeng/JobPilot/45ef792ab8410ca20f3d6e02762da861a33f4b62/README.md",
+          "retrieved_at": "2026-11-15T09:29:36.477609+00:00",
+          "sha256": "fc67a057e36a201f3013bc7f61ca02d598d1fa328ef8ddd506b200ce64c0ff39",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/official/jlifeng__JobPilot/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/jlifeng/JobPilot/45ef792ab8410ca20f3d6e02762da861a33f4b62/LICENSE",
+          "retrieved_at": "2026-11-15T09:38:48.6512515+00:00",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/official/jlifeng__JobPilot/NOTICE",
+          "source_url": "https://raw.githubusercontent.com/jlifeng/JobPilot/45ef792ab8410ca20f3d6e02762da861a33f4b62/NOTICE",
+          "retrieved_at": "2026-11-15T09:38:48.6512515+00:00",
+          "sha256": "45a51124231ff6097f8eab8cadad4c2ec8089eb3de516822fbb24f38890eaada",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/official/jlifeng__JobPilot/README.md",
+          "source_url": "https://raw.githubusercontent.com/jlifeng/JobPilot/45ef792ab8410ca20f3d6e02762da861a33f4b62/README.md",
+          "retrieved_at": "2026-11-15T09:38:48.6512515+00:00",
+          "sha256": "fc67a057e36a201f3013bc7f61ca02d598d1fa328ef8ddd506b200ce64c0ff39",
+          "reference_type": "recorded_ref"
+        }
+      ]
+    },
+    {
+      "repo": "langchain-ai/langgraph",
+      "url": "https://github.com/langchain-ai/langgraph",
+      "observed_commits": [
+        "08a2016953789a4f579b4d36bd1967941ec62012"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/branch_sources/langchain-ai__langgraph/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/langchain-ai/langgraph/refs/heads/main/LICENSE",
+          "retrieved_at": "2026-11-15T09:46:30.1827841+00:00",
+          "sha256": "d9bb52f2e3540d60ff50d8f0f5b6ba649b7fd346948c4c3d086c8afb120763c7",
+          "reference_type": "branch"
+        },
+        {
+          "path": "research/2026-11-15/branch_sources/langchain-ai__langgraph/README.md",
+          "source_url": "https://raw.githubusercontent.com/langchain-ai/langgraph/refs/heads/main/README.md",
+          "retrieved_at": "2026-11-15T09:46:30.1827841+00:00",
+          "sha256": "3a13e257af1216962d53d72414a7f44ac1fc5cea34d994bdff60ea2a3b045933",
+          "reference_type": "branch"
+        }
+      ]
+    },
+    {
+      "repo": "langgenius/dify",
+      "url": "https://github.com/langgenius/dify",
+      "observed_commits": [
+        "61c8c3b2fed86b77da2ac9486e673852b7cea648"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/branch_sources/langgenius__dify/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/langgenius/dify/refs/heads/main/LICENSE",
+          "retrieved_at": "2026-11-15T09:46:30.1828428+00:00",
+          "sha256": "232cf91474932d5110ed304e53b6b742a58463857c571fae803fdf2ac36d7bb3",
+          "reference_type": "branch"
+        },
+        {
+          "path": "research/2026-11-15/branch_sources/langgenius__dify/README.md",
+          "source_url": "https://raw.githubusercontent.com/langgenius/dify/refs/heads/main/README.md",
+          "retrieved_at": "2026-11-15T09:46:30.1828428+00:00",
+          "sha256": "81a960f6d59aeffa60a319dfe84ebb6d2372679d7343c4a0a60cf86d7faf8146",
+          "reference_type": "branch"
+        }
+      ]
+    },
+    {
+      "repo": "microsoft/markitdown",
+      "url": "https://github.com/microsoft/markitdown",
+      "observed_commits": [
+        "ed178952a6672abdfd35b5f9e76a80b6cefc086e"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/verified/microsoft__markitdown/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/microsoft/markitdown/ed178952a6672abdfd35b5f9e76a80b6cefc086e/LICENSE",
+          "retrieved_at": "2026-11-15T09:29:36.305317+00:00",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/verified/microsoft__markitdown/README.md",
+          "source_url": "https://raw.githubusercontent.com/microsoft/markitdown/ed178952a6672abdfd35b5f9e76a80b6cefc086e/README.md",
+          "retrieved_at": "2026-11-15T09:29:36.305317+00:00",
+          "sha256": "7d27ea30126c35a18fb7392454a30da72f62def2cc0cd222926e6207ac82a9d8",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/official/microsoft__markitdown/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/microsoft/markitdown/ed178952a6672abdfd35b5f9e76a80b6cefc086e/LICENSE",
+          "retrieved_at": "2026-11-15T09:38:48.3997109+00:00",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/official/microsoft__markitdown/README.md",
+          "source_url": "https://raw.githubusercontent.com/microsoft/markitdown/ed178952a6672abdfd35b5f9e76a80b6cefc086e/README.md",
+          "retrieved_at": "2026-11-15T09:38:48.3997109+00:00",
+          "sha256": "7d27ea30126c35a18fb7392454a30da72f62def2cc0cd222926e6207ac82a9d8",
+          "reference_type": "recorded_ref"
+        }
+      ]
+    },
+    {
+      "repo": "mozilla/pdf.js",
+      "url": "https://github.com/mozilla/pdf.js",
+      "observed_commits": [
+        "d60bc7426aa0968d5b95ff8ca3a76dbc6ce23a3a"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/verified/mozilla__pdf.js/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/mozilla/pdf.js/d60bc7426aa0968d5b95ff8ca3a76dbc6ce23a3a/LICENSE",
+          "retrieved_at": "2026-11-15T09:28:20.772055+00:00",
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/branch_sources/mozilla__pdf.js/README.md",
+          "source_url": "https://raw.githubusercontent.com/mozilla/pdf.js/refs/heads/master/README.md",
+          "retrieved_at": "2026-11-15T09:46:32.6922555+00:00",
+          "sha256": "cf672f85411575de7e6996f11bf300f0c747749f0c6a288b0c931af0c324655c",
+          "reference_type": "branch"
+        }
+      ]
+    },
+    {
+      "repo": "openai/openai-agents-python",
+      "url": "https://github.com/openai/openai-agents-python",
+      "observed_commits": [
+        "64fbde5d02b42ae5f9db668eb0184cdb3fc9d775"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/branch_sources/openai__openai-agents-python/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/openai/openai-agents-python/refs/heads/main/LICENSE",
+          "retrieved_at": "2026-11-15T09:46:30.1828300+00:00",
+          "sha256": "13df7812ca53ecaae1cb4a868844bb598373047ae1d580e4debfbef1dd5b6915",
+          "reference_type": "branch"
+        },
+        {
+          "path": "research/2026-11-15/branch_sources/openai__openai-agents-python/README.md",
+          "source_url": "https://raw.githubusercontent.com/openai/openai-agents-python/refs/heads/main/README.md",
+          "retrieved_at": "2026-11-15T09:46:30.1828300+00:00",
+          "sha256": "cf68cb43182d6ea4f79a32421f6723e8ee2cc0f68f97524da7f300e9fc77940b",
+          "reference_type": "branch"
+        }
+      ]
+    },
+    {
+      "repo": "Programmergyt/ai-career-copilot",
+      "url": "https://github.com/Programmergyt/ai-career-copilot",
+      "observed_commits": [
+        "721a54d8f38053a784690b9e5cb06e0f01de75f4"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/verified/Programmergyt__ai-career-copilot/README.md",
+          "source_url": "https://raw.githubusercontent.com/Programmergyt/ai-career-copilot/721a54d8f38053a784690b9e5cb06e0f01de75f4/README.md",
+          "retrieved_at": "2026-11-15T09:29:36.607196+00:00",
+          "sha256": "dfd4c446a0e41b3a8497fa32d6ce676f98bbec825660d3537294d461014f7b99",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/official/Programmergyt__ai-career-copilot/README.md",
+          "source_url": "https://raw.githubusercontent.com/Programmergyt/ai-career-copilot/721a54d8f38053a784690b9e5cb06e0f01de75f4/README.md",
+          "retrieved_at": "2026-11-15T09:39:06.0820726+00:00",
+          "sha256": "dfd4c446a0e41b3a8497fa32d6ce676f98bbec825660d3537294d461014f7b99",
+          "reference_type": "recorded_ref"
+        }
+      ]
+    },
+    {
+      "repo": "pydantic/pydantic-ai",
+      "url": "https://github.com/pydantic/pydantic-ai",
+      "observed_commits": [
+        "f93bcff0c72caa0d5b0e2ead8b550d9674c8c9c4"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/official/pydantic__pydantic-ai/README.md",
+          "source_url": "https://raw.githubusercontent.com/pydantic/pydantic-ai/f93bcff0c72caa0d5b0e2ead8b550d9674c8c9c4/README.md",
+          "retrieved_at": "2026-11-15T09:32:44.4983850+00:00",
+          "sha256": "0ea15a6d4433e885c9a4f49e23865480a3d38bf76df2d9dee2bed6e4b0fb2dd7",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/branch_sources/pydantic__pydantic-ai/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/pydantic/pydantic-ai/refs/heads/main/LICENSE",
+          "retrieved_at": "2026-11-15T09:46:30.1828404+00:00",
+          "sha256": "bc0e89738f36944c8106e1947c3d69631f9c33b8f1bcb60ec4f89d677d2dfcf4",
+          "reference_type": "branch"
+        }
+      ]
+    },
+    {
+      "repo": "srbhr/Resume-Matcher",
+      "url": "https://github.com/srbhr/Resume-Matcher",
+      "observed_commits": [
+        "e2a32b6823bb7f5996cafdf007b6ba6f0efd8f98"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/verified/srbhr__Resume-Matcher/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/srbhr/Resume-Matcher/e2a32b6823bb7f5996cafdf007b6ba6f0efd8f98/LICENSE",
+          "retrieved_at": "2026-11-15T09:28:20.694390+00:00",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/branch_sources/srbhr__Resume-Matcher/README.md",
+          "source_url": "https://raw.githubusercontent.com/srbhr/Resume-Matcher/refs/heads/main/README.md",
+          "retrieved_at": "2026-11-15T09:46:32.0256769+00:00",
+          "sha256": "71e6c03dab71918bb574af6332262a957ded75e55f332a5d6fbc08110116f107",
+          "reference_type": "branch"
+        }
+      ]
+    },
+    {
+      "repo": "xitanggg/open-resume",
+      "url": "https://github.com/xitanggg/open-resume",
+      "observed_commits": [
+        "4f8255a2c763479837f69f1dccf2a3338730cd79"
+      ],
+      "files": [
+        {
+          "path": "research/2026-11-15/verified/xitanggg__open-resume/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/xitanggg/open-resume/4f8255a2c763479837f69f1dccf2a3338730cd79/LICENSE",
+          "retrieved_at": "2026-11-15T09:28:20.662180+00:00",
+          "sha256": "20b067f86de375aae6db0f283ab2e65de24d537733b89bd58432c101259d84cf",
+          "reference_type": "recorded_ref"
+        },
+        {
+          "path": "research/2026-11-15/branch_sources/xitanggg__open-resume/README.md",
+          "source_url": "https://raw.githubusercontent.com/xitanggg/open-resume/refs/heads/main/README.md",
+          "retrieved_at": "2026-11-15T09:46:32.0122975+00:00",
+          "sha256": "2cdfc64a806a288e15ae57aabaf4b6560fb6e17506fa5bf657a166ab5002ab51",
+          "reference_type": "branch"
+        }
+      ]
+    }
+  ],
+  "local_inputs": [
+    {
+      "path": "简面智能体·两周实施计划与分工表.docx",
+      "sha256": "ab558f9ec77fa4d9133df73bf9a1e95144f99d147d72276547b5fbd8766b3c92"
+    },
+    {
+      "path": "简面智能体模块功能规格说明书 v0.1.docx",
+      "sha256": "c80ddae35caa4b73a907cb7bd3e79fffd8000a914e10243e16cbf9c16c9d0179"
+    },
+    {
+      "path": "简面智能体项目策划书.docx",
+      "sha256": "4526056b3a257d595d39978a8d93db5c7963f6c3d0ae9f3352a37523a3deec7d"
+    },
+    {
+      "path": "简面智能体项目策划书（两页版）.docx",
+      "sha256": "2ebaec448673c50e736553cc6ceabcc6960af44f213109d079b9b981329d1d1f"
+    },
+    {
+      "path": "简面智能体项目说明书.docx",
+      "sha256": "3a476b1d5ebb94026d36e1b74d60f731d1cd4917b3eff1609b0a33ff1fe7fd97"
+    }
+  ]
+}

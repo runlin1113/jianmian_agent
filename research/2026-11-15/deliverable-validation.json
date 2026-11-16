@@ -1,0 +1,20 @@
+{
+  "artifacts": [
+    {
+      "file": "docs\\简面智能体架构设计方案.docx",
+      "paragraphs": 177,
+      "tables": 14,
+      "bytes": 275597
+    },
+    {
+      "file": "docs\\简面智能体开源项目调研.docx",
+      "paragraphs": 34,
+      "tables": 4,
+      "bytes": 45911
+    }
+  ],
+  "repositories_with_saved_files": 15,
+  "repositories_considered": 16,
+  "requirements_checked": "R1-R7 and M1-M14 present; illustrative JSON parses",
+  "limitations": "DOCX package and structure checked; no Word/LibreOffice pagination rendering available; application runtime not modified or tested."
+}

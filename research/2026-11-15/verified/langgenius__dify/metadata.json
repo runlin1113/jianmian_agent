@@ -1,0 +1,10 @@
+{
+  "repo": "langgenius/dify",
+  "retrieved_at": "2026-11-15T09:26:19.621139+00:00",
+  "files": {},
+  "errors": [
+    "README.md: <urlopen error timed out>",
+    "LICENSE: <urlopen error timed out>"
+  ],
+  "ref": "61c8c3b2fed86b77da2ac9486e673852b7cea648"
+}

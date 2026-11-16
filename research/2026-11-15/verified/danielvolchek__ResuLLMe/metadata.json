@@ -1,0 +1,10 @@
+{
+  "repo": "danielvolchek/ResuLLMe",
+  "retrieved_at": "2026-11-15T09:28:20.694390+00:00",
+  "files": {},
+  "errors": [
+    "repository page: <urlopen error timed out>",
+    "README.md: <urlopen error timed out>"
+  ],
+  "ref": "HEAD"
+}

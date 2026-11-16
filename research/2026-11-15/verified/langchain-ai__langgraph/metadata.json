@@ -1,0 +1,10 @@
+{
+  "repo": "langchain-ai/langgraph",
+  "retrieved_at": "2026-11-15T09:26:19.616950+00:00",
+  "files": {},
+  "errors": [
+    "README.md: <urlopen error timed out>",
+    "LICENSE: <urlopen error timed out>"
+  ],
+  "ref": "08a2016953789a4f579b4d36bd1967941ec62012"
+}
